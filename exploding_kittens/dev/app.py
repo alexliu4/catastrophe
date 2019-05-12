@@ -103,6 +103,10 @@ def logout():
         session.pop('user')
     return redirect(url_for('home'))
 
+@app.route('/game', methods = ['GET'])
+def game():
+    return render_template("game.html")
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
