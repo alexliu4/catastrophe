@@ -1,6 +1,12 @@
+
 from flask import Flask, render_template, session, request, url_for, redirect, flash
+from passlib.hash import md5_crypt
+from util import db
+import os
+
 
 app = Flask(__name__)
+app.secret_key = os.urandom(32)
 
 @app.route("/")
 def home():

@@ -6,7 +6,7 @@ def add_user(username, hashed_pass):
     '''adds users to use table'''
     db = sqlite3.connect(DB)
     c = db.cursor()
-    command = "INSERT INTO users (username,password)VALUES(?,?);"
+    command = "INSERT INTO users (username,password, win, total)VALUES(?,?,0,0);"
     c.execute(command, (username, hashed_pass))
     db.commit()
     db.close()
@@ -15,7 +15,7 @@ def add_userFull(username, hashed_pass, question, hashed_ans, ):
     '''adds users to use table'''
     db = sqlite3.connect(DB)
     c = db.cursor()
-    command = "INSERT INTO users (username,password, question, answer)VALUES(?,?,?,?);"
+    command = "INSERT INTO users (username,password, question, answer, win, total)VALUES(?,?,?,?,0,0);"
     c.execute(command, (username, hashed_pass, question, hashed_ans))
     db.commit()
     db.close()
@@ -62,6 +62,16 @@ def get_all_users():
         users[item[0]] = item[1]
     db.close()
     return users
+
+def add_stat(username, win):
+    '''adds atat to users account'''
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    command = "UPDATE users SET win='" + hashed_pass + "'WHERE username='" + user + "';"
+    c.execute(command)
+    # print("passwords updated")
+    db.commit()
+    db.close()
 
 # MAKE TABLES AND DATABASE IF THEY DONT EXIST
 db = sqlite3.connect(DB)
