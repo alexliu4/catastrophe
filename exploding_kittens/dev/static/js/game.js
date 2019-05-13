@@ -41,11 +41,38 @@ var move = function(e){
 	    window.cancelAnimationFrame(requestID);
 	};
     }
+
+    var x_inc = 0;
+    var y_inc = 0;
     var place = function(){
+	c.removeChild(e.target);
+	var prev_y = Number(e.target.getAttribute("y"));
+	var prev_x = Number(e.target.getAttribute("x"));
+
+	e.target.setAttribute("y", prev_y + y_inc);
+	e.target.setAttribute("x", prev_x + x_inc);
+	c.appendChild(e.target);
+	//cancel before animating in case  clicked multiple times
+	window.cancelAnimationFrame(requestID)
+	requestID = window.requestAnimationFrame(place);
+	if (prev_y < 200 ){
+	    window.cancelAnimationFrame(requestID);
+	};
     }
 
-    reset_positions()
-    shift();
+    position = e.target.getAttribute("position");
+    
+    if (position == "down"){
+	console.log(position);
+	reset_positions()
+	shift();
+	e.target.setAttribute("position", "up");
+    }
+    else if (position == "up"){
+	console.log(position);
+	place();
+	e.target.setAttribute("position", "placed");
+    }
 
 };
 
@@ -58,6 +85,7 @@ for(i=0; i<5; i+=1){
     card.setAttribute("height",200);
     card.setAttribute("x", 100 + i*200);
     card.setAttribute("y", 400);
+    card.setAttribute("position", "down");
     card.addEventListener("click", move);
     c.appendChild(card);
     cards[i] = card;
@@ -69,6 +97,7 @@ var reset_positions = function(){
 	c.removeChild(card);
 	card.setAttribute("x", 100 + i * 200);
 	card.setAttribute("y", 400);
+	card.setAttribute("position", "down");
 	c.appendChild(card);
     }
 }
