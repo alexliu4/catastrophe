@@ -28,7 +28,6 @@ var cards = [];
 
 var move = function(e){
     console.log(e);
-    var current = 0;
     var shift = function(){
 	c.removeChild(e.target);
 	prev = Number(e.target.getAttribute("y"));
@@ -42,10 +41,35 @@ var move = function(e){
 	};
     }
     var place = function(){
+	c.removeChild(e.target);
+	prev_x = Number(e.target.getAttribute("x"));
+	prev_y = Number(e.target.getAttribute("y"));
+	e.target.setAttribute("y", prev_y-2);
+	c.appendChild(e.target);
+	
+	//cancel before animating in case  clicked multiple times
+	window.cancelAnimationFrame(requestID)
+	requestID = window.requestAnimationFrame(place);
+	if (prev_y<200){
+	    window.cancelAnimationFrame(requestID);
+	};
     }
 
-    reset_positions()
-    shift();
+    position = e.target.getAttribute("position");
+    console.log(position);
+
+    if (position == "up"){
+	place();
+	e.target.setAttribute("position", "none");
+    }
+    
+    else if (position == "down"){
+	reset_positions();
+	shift();
+	e.target.setAttribute("position", "up");
+    }
+    
+
 
 };
 
@@ -58,6 +82,7 @@ for(i=0; i<5; i+=1){
     card.setAttribute("height",200);
     card.setAttribute("x", 100 + i*200);
     card.setAttribute("y", 400);
+    card.setAttribute("position", "down");
     card.addEventListener("click", move);
     c.appendChild(card);
     cards[i] = card;
@@ -69,6 +94,7 @@ var reset_positions = function(){
 	c.removeChild(card);
 	card.setAttribute("x", 100 + i * 200);
 	card.setAttribute("y", 400);
+	card.setAttribute("position", "down");
 	c.appendChild(card);
     }
 }
