@@ -30,7 +30,7 @@ def update_pass(user, hashed_pass):
     # print(something)
     # print(user)
     # print(hashed_pass)
-    command = "UPDATE users SET password='" + hashed_pass + "'WHERE username='" + user + "';"
+    command = "UPDATE users SET password ='" + hashed_pass + "'WHERE username ='" + user + "';"
     c.execute(command)
     # print("passwords updated")
     db.commit()
@@ -63,13 +63,18 @@ def get_all_users():
     db.close()
     return users
 
-def add_stat(username, win):
-    '''adds atat to users account'''
+def add_stat(user, win):
+    '''adds stat to users account'''
     db = sqlite3.connect(DB)
     c = db.cursor()
-    command = "UPDATE users SET win='" + hashed_pass + "'WHERE username='" + user + "';"
+    command = "SELECT win,total from users WHERE username ='" + user + "';"
     c.execute(command)
-    # print("passwords updated")
+    games = c.fetchall()
+    win = games[0] + 1
+    total = games[1] + 1
+    command = "UPDATE users SET win =" + win + ", total =" + total + "WHERE username ='" + user + "';"
+    c.execute(command)
+    # print("stats updated")
     db.commit()
     db.close()
 
