@@ -78,6 +78,20 @@ def add_stat(user, win):
     db.commit()
     db.close()
 
+def get_stat(user):
+    '''returns all the users and stats in dict {user:pass}'''
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    command = "SELECT username,password from users;"
+    c.execute(command)
+    info = c.fetchall()
+    users = {}
+    for item in info:
+        list = [ str(item[1]), str(item[2])]
+        users[item[0]] = list
+    db.close()
+    return users
+
 # MAKE TABLES AND DATABASE IF THEY DONT EXIST
 db = sqlite3.connect(DB)
 c = db.cursor()
