@@ -66,6 +66,7 @@ var setup = function(e){
 // adds the back logo of the deck
   var card = document.createElementNS("http://www.w3.org/2000/svg", "image");
   card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", "../static/images/backcard.png");
+  card.setAttribute("id", "back")
   card.setAttribute("width",200);
   card.setAttribute("height",200);
   card.setAttribute("x", 0);
@@ -78,6 +79,25 @@ var setup = function(e){
 }
 
 setup()
+
+// add an event listener to the card instead
+c.addEventListener('click', function(e) {
+  if (e.target.getAttribute("id") == "back"){
+    // .removeChild(e)
+    // e.target.setAttribute("width", 300);
+    console.log("hi michelle")
+    var card = document.createElementNS("http://www.w3.org/2000/svg", "image");
+    var drew = draw()
+    card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", drew);
+    card.setAttribute("width",200);
+    card.setAttribute("height",200);
+    card.setAttribute("x", 200);
+    card.setAttribute("y", 100);
+    card.setAttribute("position", "down");
+    c.appendChild(card);
+    console.log("hello")
+  };
+})
 
 // draw()
 // shuffle()
