@@ -55,12 +55,13 @@ var move = function(e){
 	};
     }
 
-    var x_inc = (500 - Number(card.getAttribute("x")))/15.0;
-    var y_inc = (200 - Number(card.getAttribute("y")))/15.0;
     var place = function(){
 	c.removeChild(card);
 	var prev_y = Number(card.getAttribute("y"));
 	var prev_x = Number(card.getAttribute("x"));
+
+	var x_inc = (500 - prev_x)/10;
+	var y_inc = (200 - prev_y)/10;
 
 	card.setAttribute("y", prev_y + y_inc);
 	card.setAttribute("x", prev_x + x_inc);
@@ -68,7 +69,7 @@ var move = function(e){
 	//cancel before animating in case  clicked multiple times
 	window.cancelAnimationFrame(requestID)
 	requestID = window.requestAnimationFrame(place);
-	if (prev_y <= 200 ){
+	if (prev_y < 201 ){
 	    window.cancelAnimationFrame(requestID);
 	};
     }
