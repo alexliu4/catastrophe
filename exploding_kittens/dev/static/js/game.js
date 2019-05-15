@@ -3,6 +3,7 @@ var c = document.getElementById("play_area");
 
 var requestID = 0;
 deck = []
+better_deck = []
 cards = {
     "card1": "../static/images/attack.png",
     "card2": "../static/images/drawfrombottom.png",
@@ -19,7 +20,6 @@ for (i = 1; i < 7; i+=1){
 }
 console.log(deck)
 
-
 var draw = function(e){
     var random = Math.floor(Math.random() * deck.length);
     console.log(random); // random index
@@ -27,6 +27,33 @@ var draw = function(e){
     // console.log(drew)
     // console.log(deck)
     return drew
+}
+
+var better_draw = function(e){
+    var random_index = Math.floor(Math.random() * deck.length);
+    console.log(random_index);
+    card = better_deck.splice(random,1)
+    console.log(card)
+    return card
+}
+
+
+for (i = 1; i < 7; i+=1){
+    var card = document.createElementNS("http://www.w3.org/2000/svg", "image");
+    var drew = draw()
+    card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", drew);
+    card.setAttribute("width",200);
+    card.setAttribute("height",200);
+    card.setAttribute("x", 0);
+    card.setAttribute("y", 100);
+    card.setAttribute("position", "down");
+    card.setAttribute("type", cards["card"+String(i)])
+    card.addEventListener("click", move);
+    c.appendChild(card);
+    
+    for (j = 0; j < 4; j+=1){
+	better_deck.push(card);
+    }
 }
 
 var shuffle = function(e){
@@ -144,6 +171,8 @@ var setup = function(e){
     deck.push("../static/images/explodingkitten.png") // adds the exploding kitten after everything
     shuffle()
 }
+
+
 
 
 
