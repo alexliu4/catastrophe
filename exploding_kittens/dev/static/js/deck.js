@@ -39,7 +39,7 @@ var shuffle = function(e){
 }
 
 var setup = function(e){
-// first four cards
+  // first four cards
   for(k=0; k<4; k+=1){
     var card = document.createElementNS("http://www.w3.org/2000/svg", "image");
     var drew = draw()
@@ -52,42 +52,44 @@ var setup = function(e){
     card.setAttribute("position", "down");
     c.appendChild(card);
     console.log("hello")
-  };
-// gives everyone a diffuse
-  var card = document.createElementNS("http://www.w3.org/2000/svg", "image");
-  card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", "../static/images/diffuse.png");
-  card.setAttribute("width",200);
-  card.setAttribute("height",200);
-  card.setAttribute("x", 100 + 4*200);
-  card.setAttribute("y", 400);
-  card.setAttribute("position", "down");
-  c.appendChild(card);
 
-// adds the back logo of the deck
-  var card = document.createElementNS("http://www.w3.org/2000/svg", "image");
-  card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", "../static/images/backcard.png");
-  card.setAttribute("id", "back")
-  card.setAttribute("width",200);
-  card.setAttribute("height",200);
-  card.setAttribute("x", 0);
-  card.setAttribute("y", 100);
-  card.setAttribute("position", "down");
-  c.appendChild(card);
+    // gives everyone a diffuse
+    var card = document.createElementNS("http://www.w3.org/2000/svg", "image");
+    card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", "../static/images/diffuse.png");
+    card.setAttribute("width",200);
+    card.setAttribute("height",200);
+    card.setAttribute("x", 100 + 4*200);
+    card.setAttribute("y", 400);
+    card.setAttribute("position", "down");
+    c.appendChild(card);
 
-  deck.push("../static/images/explodingkitten.png") // adds the exploding kitten after everything
-  shuffle()
-}
-
+    deck.push("../static/images/explodingkitten.png") // adds the exploding kitten after everything
+    shuffle()
+  }
+};
 setup()
 
-// add an event listener to the card instead
-c.addEventListener('click', function(e) {
-  if (e.target.getAttribute("id") == "back"){
-    // .removeChild(e)
-    // e.target.setAttribute("width", 300);
-    console.log("hi michelle")
+var create_deck = function(e){
+  // adds the back logo of the deck
+  var back_deck = document.createElementNS("http://www.w3.org/2000/svg", "image");
+  back_deck.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", "../static/images/backcard.png");
+  back_deck.setAttribute("id", "back")
+  back_deck.setAttribute("width",200);
+  back_deck.setAttribute("height",200);
+  back_deck.setAttribute("x", 0);
+  back_deck.setAttribute("y", 100);
+  back_deck.setAttribute("position", "down");
+  c.appendChild(back_deck);
+  back_deck.addEventListener('click', function(e){
+    // console.log("length")
+    // console.log(deck.length)
+    if (deck.length == 1){
+      c.removeChild(back_deck)
+    }
     var card = document.createElementNS("http://www.w3.org/2000/svg", "image");
     var drew = draw()
+    console.log("drew:")
+    console.log(drew)
     card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", drew);
     card.setAttribute("width",200);
     card.setAttribute("height",200);
@@ -95,9 +97,15 @@ c.addEventListener('click', function(e) {
     card.setAttribute("y", 100);
     card.setAttribute("position", "down");
     c.appendChild(card);
-    console.log("hello")
-  };
-})
+  }
+);
+}
+
+create_deck()
+
+
+// add an event listener to the card instead
+
 
 // draw()
 // shuffle()
