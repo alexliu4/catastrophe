@@ -113,6 +113,11 @@ def logout():
 def game():
     return render_template("game.html")
 
+@app.route('/how', methods = ['GET'])
+def how():
+    return render_template("how.html")
+
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
