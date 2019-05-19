@@ -1,6 +1,6 @@
 import sqlite3
-#DB = "data/accounts.db"
-DB = "/var/www/kittens/kittens/data/accounts.db"
+DB = "data/accounts.db"
+#DB = "/var/www/kittens/kittens/data/accounts.db"
 
 def add_user(username, hashed_pass):
     '''adds users to use table'''
