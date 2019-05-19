@@ -1,10 +1,52 @@
 {% extends "base.html" %}
 {% block content %}
+<script>
+
+
+    var gauges = [];
+    document.addEventListener("DOMContentLoaded", function(event)
+    {
+      var opt =
+      {
+
+        //label: label,
+        minVal:  0,
+        maxVal:  100,
+        minorTicks: 5,
+        needleVal : Math.round(30),
+        tickSpaceMinVal : 1,
+        tickSpaceMajVal : 10,
+        divID: "gaugeBox",
+        gaugeUnits: "%"
+      }
+
+      var range = opt.maxVal - opt.minVal;
+      opt.grayZones = [{ from: opt.minVal, to: opt.minVal + range*0.25 }];
+      opt.yellowZones = [{ from: opt.minVal + range*0.25, to: opt.minVal + range*0.65 }];
+      opt.orangeZones = [{ from: opt.minVal + range*0.65, to: opt.minVal + range*0.9 }];
+      opt.redZones = [{ from: opt.minVal + range*0.9, to: opt.maxVal }];
+      opt.grayColor = "#E4E4E4";
+      opt.yellowColor = "#FDB71B";
+      opt.orangeColor = "#FB6A3B";
+      opt.redColor = "#F5384E";
+
+      gauges[0] = new Gauge(opt);
+
+    })
+
+     gauges[0].addEventListener('click', function(event)
+     {
+       gauges[0].updateGauge(Math.random() * 100)
+     })
+
+  </script>
 <div class="container-fluid" align="center">
   <svg style="border: 1px solid;" width="1200" height="600" id="play_area">
 
   </svg>
 </div>
-
+<script src="http://d3js.org/d3.v5.min.js"
+  charset="utf-8"></script>
  <script type="text/javascript" src="{{ url_for('static', filename='js/game.js') }}" ></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/gauge2.js') }}" ></script>
 {% endblock %}
