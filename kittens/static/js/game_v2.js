@@ -5,26 +5,25 @@ var deck = [];
 var my_hand = [];
 var opponent_hand = [];
 
-var card_images = {
-    "card1": "../static/images/attack.png",
-    "card2": "../static/images/drawfrombottom.png",
-    "card3": "../static/images/favor.png",
-    "card4": "../static/images/reverse.png",
-    "card5": "../static/images/shuffle.png",
-    "card6": "../static/images/skip.png",
-};
+var requestID = 0;
 
-var make_card = function(type, image){
+var card_images = {
+    "attack": "../static/images/attack.png",
+    "drawfrombottom": "../static/images/drawfrombottom.png",
+    "favor": "../static/images/favor.png",
+    "shuffle": "../static/images/shuffle.png",
+    "skip": "../static/images/skip.png",
+    "diffuse": "../static/images/diffuse.png"
+}
+
+var make_card = function(type){
     var card = document.createElementNS("http://www.w3.org/2000/svg", "image");
-    card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", image);
+    card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", "../static/images/backcard.png");
     card.setAttribute("width",200);
     card.setAttribute("height",200);
     card.setAttribute("x", 0);
-    card.setAttribute("y", 100);
-    card.setAttribute("position", "down");
+    card.setAttribute("y", 200);
     card.setAttribute("type", type)
-    //should be added once it becomes part of the hand
-    //card.addEventListener("click", move);
     return card
 };
 
@@ -40,11 +39,17 @@ var shuffle = function(array){
 };
 
 var make_deck = function(){
-    for (i = 1; i < 7; i+=1){
-	var type = "card"+String(i);
-	var image = card_images[type];
+    var types = [
+	"attack",
+	"drawfrombottom",
+	"favor",
+	"shuffle",
+	"skip"
+    ]
+    for (i = 0; i < 5; i+=1){
+	var type = types[i];
 	for (j = 0; j < 4; j+=1){
-	    card = make_card(type, image);
+	    card = make_card(type);
 	    deck.push(card)
 	}
     }
@@ -58,6 +63,7 @@ var setup = function(){
     shuffle(deck);
     console.log(deck);
     make_my_hand();
+    make_opponent_hand();
     for (i = 0; i < deck.length; i+=1){
 	var card = deck[i];
 	c.appendChild(card);
@@ -65,31 +71,68 @@ var setup = function(){
     for (i = 0; i < my_hand.length; i+=1){
 	var card = my_hand[i];
 	c.appendChild(card);
+	card = opponent_hand[i];
+	c.append(card);
     }
 };
 
 var make_my_hand = function(){
-    var diffuse = make_card("diffuse", "../static/images/diffuse.png");
-    //diffuse.addEventListener("click", move);
-    my_hand.push(diffuse);
-    for (i = 0; i < 4; i+=1){
-	var card = deck.pop();
-	card.setAttribute("x", 300 + i*200);
+    for (i = 0; i < 5; i+=1){
+	if (i == 0){
+	    card = make_card("diffuse");
+	}
+	else{
+	    var card = deck.pop();
+	}
+	card.setAttribute("x", 100 + i*200);
 	card.setAttribute("y", 400);
-	card.addEventListener("click", move);
+
+	var type = card.getAttribute("type");
+	
+	card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
+	//card.addEventListener("click", move);
+	card.addEventListener("mouseover", hover);
+	card.addEventListener("mouseleave", reset_position);
+	card.addEventListener("click", move_center);
 	my_hand.push(card);
     };
 };
 
-var move = function(e){
-    var requestID = 0;
+var make_opponent_hand = function(){
+        for (i = 0; i < 5; i+=1){
+	if (i == 0){
+	    card = make_card("diffuse", "../static/images/diffuse.png");
+	}
+	else{
+	    var card = deck.pop();
+	}
+	card.setAttribute("x", 100 + i*200);
+	card.setAttribute("y", 0);
+	my_hand.push(card);
+    };
+
+};
+
+var draw = function(e){
+    var card = deck.pop();
+    var card = e.target;
+    my_hand.push(card);
+    var type = card.getAttribute("type");
+    card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
+}
+
+var arrange_cards = function(){
+
+}
+
+var hover = function(e){
     var card = e.target;
     console.log(e);
     var current = 0;
     var shift = function(){
 	c.removeChild(card);
 	prev = Number(card.getAttribute("y"));
-	card.setAttribute("y", prev-2);
+	card.setAttribute("y", prev-5);
 	c.appendChild(card);
 	//cancel before animating in case  clicked multiple times
 	window.cancelAnimationFrame(requestID)
@@ -99,6 +142,17 @@ var move = function(e){
 	};
     }
 
+    shift();
+}
+
+var reset_position = function(e){
+    var card = e.target;
+    card.setAttribute("y", 400);
+    
+}
+
+var move_center = function(e){
+    card = e.target;
     var place = function(){
 	c.removeChild(card);
 	var prev_y = Number(card.getAttribute("y"));
@@ -117,32 +171,12 @@ var move = function(e){
 	    window.cancelAnimationFrame(requestID);
 	};
     }
+    place();
+    card.removeEventListener("mouseover", hover);
+    card.removeEventListener("mouseleave", reset_position);
+    card.removeEventListener("click", move_center);
 
-    position = card.getAttribute("position");
-    
-    if (position == "down"){
-	console.log(position);
-	reset_positions()
-	shift();
-	card.setAttribute("position", "up");
-    }
-    else if (position == "up"){
-	console.log(position);
-	place();
-	card.setAttribute("position", "placed");
-    }
-
-};
-
-var reset_positions = function(){
-    for(i=0; i<5; i+=1){
-	card = my_hand[i];
-	c.removeChild(card);
-	card.setAttribute("x", 100 + i * 200);
-	card.setAttribute("y", 400);
-	card.setAttribute("position", "down");
-	c.appendChild(card);
-    }
 }
+
 
 setup();

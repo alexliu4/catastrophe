@@ -117,3 +117,13 @@ MaggieZ -- 2019-05-18 22:54
 --------------------------------------------------------------
 - Merged gauge with game page.
 ==============================================================
+
+KarenL -- 2019-05-19 18:30
+--------------------------------------------------------------
+- Make game.js functions more efficient
+- Found bug in which cards do not move as planned when another
+card animation is taking place.
+- Card hovers at mouseover, resets at mouseleave
+- Opponent's cards are not visible to player
+- Started on drawing cards
+==============================================================
