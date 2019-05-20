@@ -103,6 +103,14 @@ def reset():
                     flash("Error occurred")
     return render_template('reset.html')
 
+@app.route('/leader', methods = ['GET'])
+def leader():
+    return render_template("leader.html")
+
+@app.route('/account', methods = ['GET'])
+def account():
+    return render_template("account.html")
+
 @app.route('/logout', methods = ['GET'])
 def logout():
     if 'user' in session:

@@ -41,6 +41,6 @@ div.container {
 }
 
 svg{
-  border: 5px solid; background-color: beige
+  border: 10px solid; background-image: url("./images/wood.png");
 
 }
