@@ -29,10 +29,7 @@ function Gauge(opt) {
     if(typeof opt.maxTickAngle === 'undefined')     {opt.maxTickAngle=300}
     if(typeof opt.zeroNeedleAngle === 'undefined')  {opt.zeroNeedleAngle=40}
     if(typeof opt.maxNeedleAngle === 'undefined')   {opt.maxNeedleAngle=320}
-    //needleWaypointOffset
-    if(typeof opt.needleWaypointOffset === 'undefined')
-    {opt.needleWaypointOffset = opt.needleWidth / 2}
-
+    
     if(typeof opt.tickColMaj === 'undefined')       {opt.tickColMaj = '#0099CC'}
     if(typeof opt.tickColMin === 'undefined')       {opt.tickColMin = '#000'}
     if(typeof opt.outerEdgeCol === 'undefined')     {opt.outerEdgeCol = '#FEFEFC'}
@@ -72,7 +69,7 @@ function Gauge(opt) {
         innerEdgeRadius = opt.gaugeRadius - opt.padding - opt.edgeWidth,
         outerEdgeRadius = opt.gaugeRadius - opt.padding,
         originX = opt.gaugeRadius + 300,
-        originY = opt.gaugeRadius + 100;
+        originY = opt.gaugeRadius + 200;
 
     if(opt.labelFontSize < 6){opt.labelFontSize = 0}
 
@@ -164,11 +161,11 @@ function Gauge(opt) {
             .attr("r", 0.50 * opt.pivotRadius)
             .style("fill", "#FDF6FD")
             .style("stroke", "none");
-    // d3.selectAll("circles")
-    //         .on("click", function(e){
-    //           console.log(e)
-    //           e.target.updateGauge(Math.random() * 100)
-    //         })
+    d3.selectAll("[id=circles]")
+            .on("click", function(e){
+              //console.log(e)
+              updateGauge(Math.random() * 100)
+            })
     for (var index in opt.grayZones)
     {
       drawBand(valueScale(opt.grayZones[index].from) - valueScale(0), valueScale(opt.grayZones[index].to)- valueScale(0), opt.grayColor);
@@ -334,12 +331,8 @@ function Gauge(opt) {
                     .x(function(d) {return d.x;})
                     .y(function(d) {return d.y;})
                     .curve(d3.curveLinear);
-                // var needleFunction = d3.line()
-                //     .x(function(d) {return d.x})
-                //     .y(function(d) {return d.y})
-                //     .curve(d3.curveLinear)
+
                 var lineSVG = lineFunc(lineData)
-                // var needleSVG = needleFunction(needleWaypoints)
                 return lineSVG
                 // return needleSVG
             }
@@ -393,7 +386,7 @@ function Gauge(opt) {
     });
 
     // Function to update the gauge value
-    this.updateGauge=function(newVal) {
+    updateGauge=function(newVal) {
         //Set default values if necessary
         if(newVal == undefined)(opt.minVal)
 

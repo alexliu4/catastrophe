@@ -61,7 +61,7 @@ var make_deck = function(){
 var setup = function(){
     make_deck();
     shuffle(deck);
-    console.log(deck);
+    //console.log(deck);
     make_my_hand();
     make_opponent_hand();
     for (i = 0; i < deck.length; i+=1){
@@ -127,7 +127,7 @@ var arrange_cards = function(){
 
 var hover = function(e){
     var card = e.target;
-    console.log(e);
+    //console.log(e);
     var current = 0;
     var shift = function(){
 	c.removeChild(card);
@@ -181,14 +181,16 @@ var main = function() {
   var game_going = true;
   var num_moves = 0;
   var turn = 1;
-  setup()
+  setup();
   /*
   while(game_going) {
     // player turn
     if(turn == 1){
       // listen to player click & see what is clicked
       document.addEventListener('click', function(e){
-        if (e.target.)
+        if (e.target.getAttribute("type") ) {
+          console.log("hi")
+        }
       })
     }
     //opponent turn
@@ -199,4 +201,4 @@ var main = function() {
   }
   */
 }
-main()
+main();
