@@ -39,3 +39,8 @@ div.container {
   font-family: "Courier New", Courier, monospace;
   font-size: 24px
 }
+
+svg{
+  border: 5px solid; background-color: beige
+
+}

@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+
 <script>
 
 
@@ -40,11 +43,14 @@
      })
 
   </script>
+
+  <br> <br> <br>
 <div class="container-fluid" align="center">
-  <svg style="border: 1px solid;" width="1200" height="600" id="play_area">
+  <svg width="1200" height="600" id="play_area" >
 
   </svg>
 </div>
+
 <script src="http://d3js.org/d3.v5.min.js"
   charset="utf-8"></script>
  <script type="text/javascript" src="{{ url_for('static', filename='js/game_v2.js') }}" ></script>
