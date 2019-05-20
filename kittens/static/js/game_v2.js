@@ -5,8 +5,6 @@ var deck = [];
 var my_hand = [];
 var opponent_hand = [];
 
-var requestID = 0;
-
 var card_images = {
     "attack": "../static/images/attack.png",
     "drawfrombottom": "../static/images/drawfrombottom.png",
@@ -126,6 +124,7 @@ var arrange_cards = function(){
 }
 
 var hover = function(e){
+    var requestID = 0;
     var card = e.target;
     console.log(e);
     var current = 0;
@@ -152,6 +151,7 @@ var reset_position = function(e){
 }
 
 var move_center = function(e){
+    var requestID = 0;
     card = e.target;
     var place = function(){
 	c.removeChild(card);
