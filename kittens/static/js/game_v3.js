@@ -135,10 +135,14 @@ var move_deck_card = function(e){
       };
     };
     move();
+
+    //  IF YOU ONLY WANT TO DRAW ONE CARD, IF YOU WANT TO DRAW MULTIPLE COMMENT THIS PART OUT
+    ////////
     document.addEventListener("click", function (e) {
       e.stopPropagation();
       console.log('stopped')
     }, true);
+    ///////
     // console.log("is this draw?")
 };
 
