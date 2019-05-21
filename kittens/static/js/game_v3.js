@@ -11,14 +11,15 @@ var card_images = {
     "favor": "../static/images/favor.png",
     "shuffle": "../static/images/shuffle.png",
     "skip": "../static/images/skip.png",
-    "diffuse": "../static/images/diffuse.png"
+    "diffuse": "../static/images/diffuse.png",
+    "explode": "../static/images/explodingkitten.png"
 };
 
 var make_card = function(type){
     var card = document.createElementNS("http://www.w3.org/2000/svg", "image");
     card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", "../static/images/backcard.png");
-    card.setAttribute("width",200);
-    card.setAttribute("height",200);
+    card.setAttribute("width",180);
+    card.setAttribute("height",180);
     card.setAttribute("x", 0);
     card.setAttribute("y", 200);
     card.setAttribute("type", type)
@@ -48,18 +49,23 @@ var make_deck = function(){
 	var type = types[i];
 	for (j = 0; j < 4; j+=1){
 	    card = make_card(type);
+	    card.addEventListener("click", move_deck_card);
 	    deck.push(card)
 	}
     }
 
-    var diffuse = make_card("diffuse", "../static/images/diffuse.png");
+    var diffuse = make_card("diffuse");
+    diffuse.addEventListener("click", move_deck_card);
+    var explode = make_card("explode");
+    explode.addEventListener("click", move_deck_card);
     deck.push(diffuse);
+    deck.push(explode);
 };
 
 var setup = function(){
     make_deck();
     shuffle(deck);
-    //console.log(deck);
+    console.log(deck);
     make_my_hand();
     make_opponent_hand();
     for (i = 0; i < deck.length; i+=1){
@@ -91,6 +97,7 @@ var make_my_hand = function(){
 	//card.addEventListener("click", move);
 	card.addEventListener("mouseover", hover);
 	card.addEventListener("mouseleave", reset_position);
+	card.removeEventListener("click", move_deck_card);
 	card.addEventListener("click", move_center);
 	my_hand.push(card);
     };
@@ -99,7 +106,7 @@ var make_my_hand = function(){
 var make_opponent_hand = function(){
     for (i = 0; i < 5; i+=1){
 	if (i == 0){
-	    card = make_card("diffuse", "../static/images/diffuse.png");
+	    card = make_card("diffuse");
 	}
 	else{
 	    var card = deck.pop();
@@ -111,17 +118,36 @@ var make_opponent_hand = function(){
 
 };
 
+var move_deck_card = function(e){
+    var card = e.target;
+    var requestID = 0;
+    var type = card.getAttribute("type");
+    card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
+    var move = function(){
+	c.removeChild(card);
+	prev = Number(card.getAttribute("x"));
+	card.setAttribute("x", prev+5);
+	c.appendChild(card);
+	window.cancelAnimationFrame(requestID)
+	requestID = window.requestAnimationFrame(move);
+	if (prev > 300 ){
+	    window.cancelAnimationFrame(requestID);
+	};
+    };
+    move();
+};
+
 var draw = function(e){
     var card = deck.pop();
     var card = e.target;
     my_hand.push(card);
     var type = card.getAttribute("type");
     card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
-}
+};
 
 var arrange_cards = function(){
 
-}
+};
 
 var hover = function(e){
     var requestID = 0;
