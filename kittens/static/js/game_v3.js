@@ -124,17 +124,22 @@ var move_deck_card = function(e){
     var type = card.getAttribute("type");
     card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
     var move = function(){
-	c.removeChild(card);
-	prev = Number(card.getAttribute("x"));
-	card.setAttribute("x", prev+5);
-	c.appendChild(card);
-	window.cancelAnimationFrame(requestID)
-	requestID = window.requestAnimationFrame(move);
-	if (prev > 300 ){
-	    window.cancelAnimationFrame(requestID);
-	};
+      c.removeChild(card);
+      prev = Number(card.getAttribute("x"));
+      card.setAttribute("x", prev+5);
+      c.appendChild(card);
+      window.cancelAnimationFrame(requestID)
+      requestID = window.requestAnimationFrame(move);
+      if (prev > 300 ){
+        window.cancelAnimationFrame(requestID);
+      };
     };
     move();
+    document.addEventListener("click", function (e) {
+      e.stopPropagation();
+      console.log('stopped')
+    }, true);
+    // console.log("is this draw?")
 };
 
 var draw = function(e){
@@ -150,24 +155,24 @@ var arrange_cards = function(){
 };
 
 var hover = function(e){
-    var requestID = 0;
-    var card = e.target;
-    //console.log(e);
-    var current = 0;
-    var shift = function(){
-	c.removeChild(card);
-	prev = Number(card.getAttribute("y"));
-	card.setAttribute("y", prev-5);
-	c.appendChild(card);
-	//cancel before animating in case  clicked multiple times
-	window.cancelAnimationFrame(requestID)
-	requestID = window.requestAnimationFrame(shift);
-	if (prev<370){
-	    window.cancelAnimationFrame(requestID);
-	};
-    }
+  var requestID = 0;
+  var card = e.target;
+  //console.log(e);
+  var current = 0;
+  var shift = function(){
+    c.removeChild(card);
+    prev = Number(card.getAttribute("y"));
+    card.setAttribute("y", prev-5);
+    c.appendChild(card);
+    //cancel before animating in case  clicked multiple times
+    window.cancelAnimationFrame(requestID)
+    requestID = window.requestAnimationFrame(shift);
+    if (prev<370){
+      window.cancelAnimationFrame(requestID);
+    };
+  }
 
-    shift();
+  shift();
 }
 
 var reset_position = function(e){
@@ -180,22 +185,22 @@ var move_center = function(e){
     var requestID = 0;
     card = e.target;
     var place = function(){
-	c.removeChild(card);
-	var prev_y = Number(card.getAttribute("y"));
-	var prev_x = Number(card.getAttribute("x"));
+      c.removeChild(card);
+      var prev_y = Number(card.getAttribute("y"));
+      var prev_x = Number(card.getAttribute("x"));
 
-	var x_inc = (500 - prev_x)/10;
-	var y_inc = (200 - prev_y)/10;
+      var x_inc = (500 - prev_x)/10;
+      var y_inc = (200 - prev_y)/10;
 
-	card.setAttribute("y", prev_y + y_inc);
-	card.setAttribute("x", prev_x + x_inc);
-	c.appendChild(card);
-	//cancel before animating in case  clicked multiple times
-	window.cancelAnimationFrame(requestID)
-	requestID = window.requestAnimationFrame(place);
-	if (prev_y < 201 ){
-	    window.cancelAnimationFrame(requestID);
-	};
+      card.setAttribute("y", prev_y + y_inc);
+      card.setAttribute("x", prev_x + x_inc);
+      c.appendChild(card);
+      //cancel before animating in case  clicked multiple times
+      window.cancelAnimationFrame(requestID)
+      requestID = window.requestAnimationFrame(place);
+      if (prev_y < 201 ){
+        window.cancelAnimationFrame(requestID);
+      };
     }
     place();
     card.removeEventListener("mouseover", hover);
@@ -218,58 +223,62 @@ var favor = function(target){
 
 
 var main = function() {
-    var game_going = true;
-    var num_moves = 0;
-    var turn = 1;
-    var num_deck = deck.length;
-    var gauge_val = 0;
-    setup();
+  var game_going = true;
+  var num_moves = 0;
+  var turn = 1;
+  var num_deck = deck.length;
+  var gauge_val = 0;
+  setup();
 
-    if(turn == 1){
-	document.removeEventListener('click', DisableClickOnPage.handler, true);
-	// listen to player click & see what is clicked
-	document.addEventListener('click', function(e){
-	    if (1===0) {
-		//draw
-		console.log("hi");
-		console.log(e.target.getAttribute("type"));
-		updateGauge(gauge_val + 5) //replace w/ calculated value
-	    }
-	    else{
-		console.log(e.target.getAttribute("type"));
-		var move = e.target.getAttribute("type");
-		if (move == 'shuffle') {shuffle(deck);}
-		else if (move == 'skip') {turn = 2;}
-		else{}
-	    }
-	})
+
+
+
+  if(turn == 1){
+    // document.removeEventListener('click', DisableClickOnPage.handler, true);
+    // listen to player click & see what is clicked
+    document.addEventListener('click', function(e){
+      if (1===0) {
+        //draw
+        console.log("hi");
+        console.log(e.target.getAttribute("type"));
+        updateGauge(gauge_val + 5) //replace w/ calculated value
+      }
+      else{
+        console.log(e.target.getAttribute("type"));
+        var move = e.target.getAttribute("type");
+        if (move == 'shuffle') {shuffle(deck);}
+        else if (move == 'skip') {turn = 2;}
+        else{}
+
+      }
+    })
+  }
+
+
+  //opponent turn ===============================================
+  if(turn == 2){
+    document.addEventListener('click', DisableClickOnPage.handler, true);
+
+
+    if (opponent_hand.length === 1) {
+      draw();
+      /*
+      [if exploding kitten drawn]
+      [ if defuse in card deck]
+      [use defuse card]
+      [else]
+      [game over boo hoo]
+      */
+      turn = 1;
     }
-
-
-    //opponent turn ===============================================
-    if(turn == 2){
-	document.addEventListener('click', DisableClickOnPage.handler, true);
-
-
-	if (opponent_hand.length === 1) {
-	    draw();
-	    /*
-	      [if exploding kitten drawn]
-              [ if defuse in card deck]
-              [use defuse card]
-              [else]
-              [game over boo hoo]
-	    */
-	    turn = 1;
-	}
-	if (gauge_val < 20) {
-	    draw();
-	    updateGauge(gauge_val + 5);
-	    turn = 1;
-	}
-	console.log("opponent has gone.")
-
+    if (gauge_val < 20) {
+      draw();
+      updateGauge(gauge_val + 5);
+      turn = 1;
     }
+    console.log("opponent has gone.")
+
+  }
 
 }
 main();
