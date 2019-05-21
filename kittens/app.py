@@ -10,18 +10,19 @@ app.secret_key = os.urandom(32)
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("login.html")
 
 @app.route('/login')
 def login():
     if 'user' in session:
-        return redirect(url_for('home'))
+        print("HELLOLOS")
+        return redirect(url_for('game'))
     return render_template('login.html')
 
 @app.route('/auth', methods = ["POST"])
 def auth():
     if 'user' in session:
-        return redirect(url_for('home'))
+        return redirect(url_for('game'))
     '''Intermediate to authenticate login by user'''
     # # # Authenticate
     username_input = request.form.get("username")
@@ -32,7 +33,7 @@ def auth():
         if md5_crypt.verify(password_input, all_usernames[username_input]):
             # Log them in
             session['user'] = username_input
-            return redirect(url_for("home"))
+            return redirect(url_for("game"))
         # Failed password and username match
         else:
             flash("Invalid password")
