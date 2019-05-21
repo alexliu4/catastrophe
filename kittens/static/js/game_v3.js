@@ -11,14 +11,15 @@ var card_images = {
     "favor": "../static/images/favor.png",
     "shuffle": "../static/images/shuffle.png",
     "skip": "../static/images/skip.png",
-    "diffuse": "../static/images/diffuse.png"
+    "diffuse": "../static/images/diffuse.png",
+    "explode": "../static/images/explodingkitten.png"
 };
 
 var make_card = function(type){
     var card = document.createElementNS("http://www.w3.org/2000/svg", "image");
     card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", "../static/images/backcard.png");
-    card.setAttribute("width",200);
-    card.setAttribute("height",200);
+    card.setAttribute("width",180);
+    card.setAttribute("height",180);
     card.setAttribute("x", 0);
     card.setAttribute("y", 200);
     card.setAttribute("type", type)
@@ -52,7 +53,8 @@ var make_deck = function(){
 	}
     }
 
-    var diffuse = make_card("diffuse", "../static/images/diffuse.png");
+    var diffuse = make_card("diffuse");
+    var explode = make_card("explode");
     deck.push(diffuse);
 };
 
@@ -99,7 +101,7 @@ var make_my_hand = function(){
 var make_opponent_hand = function(){
     for (i = 0; i < 5; i+=1){
 	if (i == 0){
-	    card = make_card("diffuse", "../static/images/diffuse.png");
+	    card = make_card("diffuse");
 	}
 	else{
 	    var card = deck.pop();
