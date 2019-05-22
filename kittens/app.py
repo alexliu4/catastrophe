@@ -110,9 +110,10 @@ def leader():
 
 @app.route('/account', methods = ['GET'])
 def account():
-    return render_template("account.html", user = calc())
+    return render_template("account.html", user = calc(), place = place())
 
 # helper functions for leader and account
+# calcuting values (loss and percentage) returns in a list
 def calc():
     if 'user' in session:
         # print (session['user'])
@@ -122,6 +123,31 @@ def calc():
         user.append(round (float(user[0]) / float(user[1]) * 100) )
     return user
 
+# gets all users and their ranks and puts them in an ordered list
+def ranker():
+    ranked = [session['user']]
+    if 'user' in session:
+        # print (session['user'])
+        users = db.ranks()
+        for user in users:
+            for i in range (0, len(ranked)):
+                if int(users[user]) > int(ranked[i]):
+                    ranked.insert(i, user)
+                if i == (len(ranked)):
+                    ranked.append(user)
+    return ranked
+
+# specific place of the user
+def place():
+    ans = 0
+    ranked = ranker()
+    print (len(ranked))
+    for i in range (len(ranked)):
+        print (ranked[i])
+        if ranked[i] == session['user']:
+            print('booyah')
+            ans = i + 1
+    return ans
 
 @app.route('/logout', methods = ['GET'])
 def logout():
