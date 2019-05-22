@@ -45,6 +45,10 @@ img {
    padding:1px;
    border:1px solid #021a40;
 }
+
+button {
+  cursor: zoom-in;
+}
 </style>
 
 <div class="hero-image">
@@ -58,26 +62,36 @@ img {
      </h1>
     <button>Check Leaderboard</button>
   </div>
-  <br> <br> <br> <br> <br> <br>
+  <br> <br> <br> <br> <br>
+  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <img src="./../static/images/profile.jpg" alt="Profile" height="1" width="1" style= "cursor: pointer;">
+  </p>
+  <br>
   <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <img src="./../static/images/profile.jpg" alt="Profile" float="left" height="300" width="300">
   </p>
 </div>
 
-<br> <br>
-
-<div class="container-fluid" align="center">
-  <h1> page under cat-struction </h1>
-  <img src="https://images-na.ssl-images-amazon.com/images/I/715tB4R5fTL._SX425_.jpg">
-
-</div>
-
 <div class="jumbotron">
+    <br> <br> <br>
+    <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button> Edit Picture </button>
+
     <h2> Rank: </h2>
-    <h2> Games Won: </h2>
-    <h2> Games Loss: </h2>
-    <h2> Games Total: </h2>
-    <h2> Percent Won: </h2>
+    <h2> Games Won: {{user[0]}} </h2>
+    <h2> Games Loss: {{user[2]}} </h2>
+    <h2> Games Total: {{user[1]}} </h2>
+    <h2> Percent Won: {{user[3]}} &percnt; </h2>
+
+
 </div>
 
 {% endblock %}

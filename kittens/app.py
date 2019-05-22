@@ -110,7 +110,18 @@ def leader():
 
 @app.route('/account', methods = ['GET'])
 def account():
-    return render_template("account.html")
+    return render_template("account.html", user = calc())
+
+# helper functions for leader and account
+def calc():
+    if 'user' in session:
+        # print (session['user'])
+        user = db.get_stat(session['user'])
+        # print (user)
+        user.append(int(user[1]) - int(user[0]))
+        user.append(round (float(user[0]) / float(user[1]) * 100) )
+    return user
+
 
 @app.route('/logout', methods = ['GET'])
 def logout():

@@ -139,10 +139,17 @@ MichelleT -- 2019-05-20 12:51
 ==============================================================
 KarenL -- 2019-05-20 19:30
 --------------------------------------------------------------
-Rearranged repo to be ready to deploy to apache2
+- Rearranged repo to be ready to deploy to apache2
 ==============================================================
 
 AlexL -- 2019-05-20 12:51
 --------------------------------------------------------------
-- CSS for the account page and created thee basic template
+- CSS for the account page and created the basic template
+==============================================================
+
+AlexL -- 2019-05-22 12:45
+--------------------------------------------------------------
+- Added db functions for account page and leaderboard pages
+- Worked on aesthetics of the account page
+- Successfully got the accounts page to show user stats
 ==============================================================
