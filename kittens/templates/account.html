@@ -1,5 +1,69 @@
 {% extends "base.html" %}
 {% block content %}
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.hero-image {
+  background-image: url("./../static/images/cat.jpg");
+  height: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+}
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+}
+
+.hero-text button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 10px 25px;
+  color: black;
+  background-color: #ddd;
+  text-align: center;
+  cursor: pointer;
+}
+
+.hero-text button:hover {
+  background-color: #555;
+  color: white;
+}
+
+img {
+   padding:1px;
+   border:1px solid #021a40;
+}
+</style>
+
+<div class="hero-image">
+  <div class="hero-text">
+    <h1 style="font-size:50px">
+
+      {% if 'user' in session %}
+        {{session['user']}}
+      {% endif %}
+
+     </h1>
+    <button>Check Leaderboard</button>
+  </div>
+  <br> <br> <br> <br> <br> <br>
+  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="./../static/images/profile.jpg" alt="Profile" float="left" height="300" width="300">
+  </p>
+</div>
+
 <br> <br>
 
 <div class="container-fluid" align="center">

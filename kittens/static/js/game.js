@@ -50,7 +50,7 @@ for (i = 1; i < 7; i+=1){
     card.setAttribute("type", cards["card"+String(i)])
     card.addEventListener("click", move);
     c.appendChild(card);
-    
+
     for (j = 0; j < 4; j+=1){
 	better_deck.push(card);
     }
@@ -102,7 +102,7 @@ var move = function(e){
     }
 
     position = card.getAttribute("position");
-    
+
     if (position == "down"){
 	console.log(position);
 	reset_positions()
@@ -142,6 +142,7 @@ var setup = function(e){
 	card.setAttribute("y", 400);
 	card.setAttribute("position", "down");
 	card.addEventListener("click", move);
+  card.setAttribute("style", "border:1px solid black;border-radius: 15px;");
 	c.appendChild(card);
 	hand.push(card)
 	console.log("hello")
@@ -154,9 +155,12 @@ var setup = function(e){
     card.setAttribute("x", 100 + 4*200);
     card.setAttribute("y", 400);
     card.setAttribute("position", "down");
+    card.setAttribute("style", "border:1px solid black;border-radius: 15px;");
     card.addEventListener("click", move);
     c.appendChild(card);
     hand.push(card)
+
+    <image width="500" height="350" xlink:href="https://www.tutorialspoint.com/videotutorials/images/coding_ground_home.jpg" clip-path="url(#myCircle)" />
 
     // adds the back logo of the deck
     var card = document.createElementNS("http://www.w3.org/2000/svg", "image");
