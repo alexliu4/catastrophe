@@ -10,6 +10,8 @@ app.secret_key = os.urandom(32)
 
 @app.route("/")
 def home():
+    if 'user' not in session:
+        return redirect(url_for('login.html'))
     return render_template("login.html")
 
 @app.route('/login')
@@ -106,10 +108,14 @@ def reset():
 
 @app.route('/leader', methods = ['GET'])
 def leader():
+    if 'user' not in session:
+        return redirect(url_for('login.html'))
     return render_template("leader.html")
 
 @app.route('/account', methods = ['GET'])
 def account():
+    if 'user' not in session:
+        return redirect(url_for('login.html'))
     return render_template("account.html", user = calc())
 
 # helper functions for leader and account
@@ -173,6 +179,8 @@ def logout():
 
 @app.route('/game', methods = ['GET'])
 def game():
+    if 'user' not in session:
+        return redirect(url_for('login.html'))
     return render_template("game.html")
 
 @app.route('/how', methods = ['GET'])
