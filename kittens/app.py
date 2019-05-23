@@ -110,7 +110,7 @@ def leader():
 
 @app.route('/account', methods = ['GET'])
 def account():
-    return render_template("account.html", user = calc(), place = place())
+    return render_template("account.html", user = calc())
 
 # helper functions for leader and account
 # calcuting values (loss and percentage) returns in a list
