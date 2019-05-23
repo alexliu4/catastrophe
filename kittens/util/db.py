@@ -79,7 +79,7 @@ def add_stat(user, win):
     db.close()
 
 def ranks():
-    '''returns all the users and stats in dict {user:pass}'''
+    '''returns all the users and stats in dict { user:[win,total] }'''
     db = sqlite3.connect(DB)
     c = db.cursor()
     command = "SELECT username,win,total from users;"
