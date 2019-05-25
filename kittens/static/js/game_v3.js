@@ -213,9 +213,35 @@ var draw = function(e){
 /*
 Rearrange the spacing of the cards every time one is added to the hand
 */
-var arrange_cards = function(){
-    
-};
+var arrange_cards = function(hand){
+    card.setAttribute("x", 100 + i * (800 / len(hand))); // 100 - 800
+    for (i = 0; i < 5; i+=1){
+      if (i == 0){
+        card = make_card("diffuse");
+      }
+      else{
+        var card = deck.pop();
+      }
+      card.setAttribute("x", 100 + i*200);
+      card.setAttribute("y", 400);
+    }
+
+
+  //   var shift = function(){
+	// c.removeChild(card);
+	// prev = Number(card.getAttribute("y"));
+	// card.setAttribute("y", prev-5);
+	// c.appendChild(card);
+	// //cancel before animating in case  clicked multiple times
+	// window.cancelAnimationFrame(requestID)
+	// requestID = window.requestAnimationFrame(shift);
+	// if (prev<370){
+	//     window.cancelAnimationFrame(requestID);
+	// };
+  //   }
+  //
+  //   shift();
+}
 
 /*
 Target should lift up when hovered over
