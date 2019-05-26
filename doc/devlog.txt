@@ -153,3 +153,9 @@ AlexL -- 2019-05-22 12:45
 - Worked on aesthetics of the account page
 - Successfully got the accounts page to show user stats
 ==============================================================
+
+AlexL -- 2019-05-26 11:54
+--------------------------------------------------------------
+- Made it so that pages cannot be accessed without logging in
+  other than the How To Play Page
+==============================================================
