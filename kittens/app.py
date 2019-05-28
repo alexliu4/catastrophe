@@ -115,7 +115,7 @@ def leader():
 @app.route('/account', methods = ['GET'])
 def account():
     if 'user' not in session:
-        return redirect(url_for('login.html'))
+        return redirect(url_for('login'))
     return render_template("account.html", user = calc())
 
 # helper functions for leader and account
@@ -169,6 +169,10 @@ def game():
 @app.route('/how', methods = ['GET'])
 def how():
     return render_template("how.html")
+
+@app.route('/photo', methods = ['GET'])
+def photo():
+    return render_template("photo.html")
 
 
 def rankByPercent():

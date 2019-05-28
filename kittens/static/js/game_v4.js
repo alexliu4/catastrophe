@@ -179,11 +179,11 @@ var move_deck_card = function(e){
 	};
     };
     */
-    card.setAttribute("x", 200);
-    card.setAttribute("y", 300);
+    card.setAttribute("x", 0);
+    card.setAttribute("y", 400);
 
     console.log(deck_length)
-    // move();
+    //move();
     /*
     document.addEventListener("click", function (e) {
 	e.stopPropagation();
@@ -197,6 +197,52 @@ var move_deck_card = function(e){
     }, true);
     turn_tracker.innerHTML = "OPPONENT'S TURN"
     */
+};
+
+var draw_from_deck = function(e){
+    
+};
+
+var move_to = function(card, location){
+    var destination_x;
+    var destination_y;
+    if (location == "opponent"){
+	destination_x = 1020;
+	destination_y = 0;
+    }
+
+    else if (location == "player"){
+	destination_x = 1020;
+	destination_y = 420;
+    }
+
+    else{
+	console.log("location not valid");
+	return;
+    }
+
+    var requestID = 0;
+    var place = function(){
+	c.removeChild(card);
+	var prev_y = Number(card.getAttribute("y"));
+	var prev_x = Number(card.getAttribute("x"));
+
+	var x_inc = (destination_x - prev_x)/10;
+	var y_inc = (destination_y - prev_y)/10;
+
+	card.setAttribute("y", prev_y + y_inc);
+	card.setAttribute("x", prev_x + x_inc);
+	c.appendChild(card);
+	//cancel before animating in case  clicked multiple times
+	window.cancelAnimationFrame(requestID)
+	requestID = window.requestAnimationFrame(place);
+	if (Math.abs(prev_y - destination_y) >= 1 ){
+	    window.cancelAnimationFrame(requestID);
+	};
+    };
+    place();
+    card.setAttribute("y", destination_y);
+    card.setAttribute("x", destination_x);
 };
 
 /*
@@ -213,35 +259,9 @@ var draw = function(e){
 /*
 Rearrange the spacing of the cards every time one is added to the hand
 */
-var arrange_cards = function(hand){
-    card.setAttribute("x", 100 + i * (800 / len(hand))); // 100 - 800
-    for (i = 0; i < 5; i+=1){
-      if (i == 0){
-        card = make_card("diffuse");
-      }
-      else{
-        var card = deck.pop();
-      }
-      card.setAttribute("x", 100 + i*200);
-      card.setAttribute("y", 400);
-    }
-
-
-  //   var shift = function(){
-	// c.removeChild(card);
-	// prev = Number(card.getAttribute("y"));
-	// card.setAttribute("y", prev-5);
-	// c.appendChild(card);
-	// //cancel before animating in case  clicked multiple times
-	// window.cancelAnimationFrame(requestID)
-	// requestID = window.requestAnimationFrame(shift);
-	// if (prev<370){
-	//     window.cancelAnimationFrame(requestID);
-	// };
-  //   }
-  //
-  //   shift();
-}
+var arrange_cards = function(){
+    
+};
 
 /*
 Target should lift up when hovered over
