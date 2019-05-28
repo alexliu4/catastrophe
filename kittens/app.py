@@ -116,7 +116,7 @@ def leader():
 def account():
     if 'user' not in session:
         return redirect(url_for('login'))
-    return render_template("account.html", user = calc())
+    return render_template("account.html", user = calc(), rankP = userRanksP(session['user']) , rankW = userRanksW(session['user']))
 
 # helper functions for leader and account
 # calcuting values (loss and percentage) returns in a list
@@ -192,9 +192,30 @@ def rankByWins():
     #         fullStat[person] = percentage
     rank = (list(reversed(sorted(fullStat.items(), key = lambda kv:(kv[1], kv[0])))))
     return rank
-print (rankByPercent())
 
-print (rankByWins()[0][0])
+def userRanksP(user):
+    dict = rankByPercent()
+    num = 1
+    for entry in dict:
+        if user == entry[0]:
+            print ("found user" )
+            return (num)
+        num += 1
+    return "none found"
+
+def userRanksW(user):
+    list = rankByWins()
+    num = 1
+    for entry in list:
+        if user == entry[0]:
+            return (num)
+        num += 1
+    return "none found"
+
+
+# [('michelle', 50), ('michelle2', 33), ('michelle3', 20), ('maggie', 20), ('alex', 4)]
+
+
 
 
 if __name__ == "__main__":
