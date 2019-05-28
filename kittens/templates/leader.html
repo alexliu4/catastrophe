@@ -1,10 +1,84 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container-fluid" align="center">
+  <link rel="stylesheet" href="{{ url_for('static', filename='auth2.css') }}">
+
   <br> <br>
   <h1> page under cat-struction </h1>
   <img src="https://images-na.ssl-images-amazon.com/images/I/715tB4R5fTL._SX425_.jpg">
+<br> <br> <br>
+
+<div class ="jumbotron">
+  Want to be on the leaderboard? <a href="/game"> Play Now! </a>
 
 </div>
 
+<div style="display: inline-block; border: 1px solid; float: center; padding: 15px;">
+ <p> Rankings By Percent </p>
+<table >
+
+    <tr>
+      <th>Name </th>
+      <th>Percent of Games Won</th>
+    </tr>
+
+
+    <tr>
+      <td> <i class="fas fa-crown"></i> {{rankPercent[0][0]}} </td>
+      <td> {{rankPercent[0][1]}} </td>
+    </tr>
+    <tr>
+      <td> {{rankPercent[1][0]}} </td>
+      <td> {{rankPercent[1][1]}} </td>
+    </tr>
+    <tr>
+      <td> {{rankPercent[2][0]}} </td>
+      <td> {{rankPercent[2][1]}} </td>
+    </tr>
+    <tr>
+      <td> {{rankPercent[3][0]}} </td>
+      <td> {{rankPercent[3][1]}} </td>
+    </tr>
+    <tr>
+      <td> {{rankPercent[4][0]}} </td>
+      <td> {{rankPercent[4][1]}} </td>
+    </tr>
+  </table>
+</div>
+<div style="display: inline-block; border: 1px solid; float: center; padding: 15px;">
+  <p> Rankings By Games </p>
+  <table>
+
+      <tr>
+        <th>Name </th>
+        <th>Games Won</th>
+      </tr>
+
+
+      <tr>
+        <td> <i class="fas fa-crown"></i> {{rankWin[0][0]}} </td>
+        <td> {{rankWin[0][1][0]}} </td>
+      </tr>
+      <tr>
+        <td> {{rankWin[1][0]}} </td>
+        <td> {{rankWin[1][1][0]}} </td>
+      </tr>
+      <tr>
+        <td> {{rankWin[2][0]}} </td>
+        <td> {{rankWin[2][1][0]}} </td>
+      </tr>
+      <tr>
+        <td> {{rankWin[3][0]}} </td>
+        <td> {{rankWin[3][1][0]}} </td>
+      </tr>
+      <tr>
+        <td> {{rankWin[4][0]}} </td>
+        <td> {{rankWin[4][1][0]}} </td>
+      </tr>
+    </table>
+  <!-- <tr> Percentage of Games Won </tr> -->
+
+
+</div>
+</div>
 {% endblock %}

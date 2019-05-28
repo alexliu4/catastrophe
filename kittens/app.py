@@ -74,7 +74,7 @@ def register():
                 return redirect(url_for("home"))
     return render_template('register.html')
 
-app.route('/reset', methods = ["GET", "POST"])
+@app.route('/reset', methods = ["GET", "POST"])
 def reset():
     if 'user' in session:
         return redirect(url_for('home'))
@@ -108,15 +108,15 @@ def reset():
 
 @app.route('/leader', methods = ['GET'])
 def leader():
-    if 'user' not in session:
-        return redirect(url_for('login'))
-    return render_template("leader.html")
+    # if 'user' not in session:
+    #     return redirect(url_for('login'))
+    return render_template("leader.html", rankPercent = rankByPercent(), rankWin =rankByWins())
 
 @app.route('/account', methods = ['GET'])
 def account():
     if 'user' not in session:
         return redirect(url_for('login'))
-    return render_template("account.html", user = calc())
+    return render_template("account.html", user = calc(), rankP = userRanksP(session['user']) , rankW = userRanksW(session['user']))
 
 # helper functions for leader and account
 # calcuting values (loss and percentage) returns in a list
@@ -173,6 +173,49 @@ def how():
 @app.route('/photo', methods = ['GET'])
 def photo():
     return render_template("photo.html")
+
+
+def rankByPercent():
+    fullStat = db.ranks()
+    for person in fullStat:
+        if (int(fullStat.get(person)[1])):
+            percentage = (int((float(fullStat.get(person)[0]) / float(fullStat.get(person)[1])) * 100 ))
+            fullStat[person] = percentage
+    rank = (list(reversed(sorted(fullStat.items(), key = lambda kv:(kv[1], kv[0])))))
+    return rank
+
+def rankByWins():
+    fullStat = db.ranks()
+    # for person in fullStat:
+    #     if (int(fullStat.get(person)[1])):
+    #         percentage = (int((float(fullStat.get(person)[0]) / float(fullStat.get(person)[1])) * 100 ))
+    #         fullStat[person] = percentage
+    rank = (list(reversed(sorted(fullStat.items(), key = lambda kv:(kv[1], kv[0])))))
+    return rank
+
+def userRanksP(user):
+    dict = rankByPercent()
+    num = 1
+    for entry in dict:
+        if user == entry[0]:
+            print ("found user" )
+            return (num)
+        num += 1
+    return "none found"
+
+def userRanksW(user):
+    list = rankByWins()
+    num = 1
+    for entry in list:
+        if user == entry[0]:
+            return (num)
+        num += 1
+    return "none found"
+
+
+# [('michelle', 50), ('michelle2', 33), ('michelle3', 20), ('maggie', 20), ('alex', 4)]
+
+
 
 
 if __name__ == "__main__":

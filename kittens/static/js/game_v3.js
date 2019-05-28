@@ -179,11 +179,11 @@ var move_deck_card = function(e){
 	};
     };
     */
-    card.setAttribute("x", 0);
-    card.setAttribute("y", 400);
+    card.setAttribute("x", 200);
+    card.setAttribute("y", 300);
 
     console.log(deck_length)
-    move();
+    // move();
     /*
     document.addEventListener("click", function (e) {
 	e.stopPropagation();

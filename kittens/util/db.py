@@ -92,6 +92,7 @@ def ranks():
     db.close()
     return users
 
+
 def get_stat(user):
     '''returns the user and stats in a list'''
     db = sqlite3.connect(DB)
