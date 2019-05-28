@@ -1,0 +1,65 @@
+.jumbotron{
+  margin-left:33%;
+  margin-right:33%;
+  margin-top: 10%;
+
+}
+
+/* li {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 24px
+} */
+
+p {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 24px
+}
+
+tr {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 24px
+}
+
+img{
+  height: 140px
+}
+
+div.polaroid {
+  width: 80%;
+  height: 210%;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 25px;
+}
+
+div.container {
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.hi{
+  font-family: "Courier New", Courier, monospace;
+  font-size: 24px
+}
+
+svg{
+  border: 10px solid; background-image: url("./images/wood.png");
+
+}
+
+/* table{
+  background-color: white;
+} */
+
+
+
+
+table{
+  background-color: beige;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 15px;
+  text-align: center;
+}
