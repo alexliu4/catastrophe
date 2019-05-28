@@ -73,7 +73,7 @@ button {
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-    <img src="./../static/images/profile.jpg" alt="Profile" height="1" width="1" style= "cursor: pointer;">
+    <img src="./../static/images/profile.jpg" alt="Profile" height="1" width="1" id = "cat" style= "cursor: pointer;">
   </p>
   <br>
   <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -93,5 +93,12 @@ button {
 
 
 </div>
+
+<script>
+  c = document.getElementById('cat');
+  c.addEventListener("click", function redirect(){
+    window.location = "http://procatinator.com/";
+  })
+</script>
 
 {% endblock %}
