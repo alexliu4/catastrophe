@@ -45,12 +45,19 @@ svg{
 
 }
 
-table{
+/* table{
   background-color: white;
-}
+} */
 body {
 border: 2px solid black;
 background: url(https://us.123rf.com/450wm/cnuisin/cnuisin1901/cnuisin190100345/116527582-cat-seamless-pattern-vector-kitten-cartoon-halloween-isolated-tile-background-repeat-wallpaper.jpg?ver=6);
 background-repeat: repeat;
 background-size: auto;
+}
+
+
+
+.ranks{
+  background-color: beige;
+  border: 1px solid black;
 }

@@ -11,7 +11,7 @@ app.secret_key = os.urandom(32)
 @app.route("/")
 def home():
     if 'user' not in session:
-        return redirect(url_for('login.html'))
+        return redirect(url_for('login'))
     return render_template("login.html")
 
 @app.route('/login')
@@ -74,7 +74,7 @@ def register():
                 return redirect(url_for("home"))
     return render_template('register.html')
 
-app.route('/reset', methods = ["GET", "POST"])
+@app.route('/reset', methods = ["GET", "POST"])
 def reset():
     if 'user' in session:
         return redirect(url_for('home'))
@@ -108,9 +108,9 @@ def reset():
 
 @app.route('/leader', methods = ['GET'])
 def leader():
-    if 'user' not in session:
-        return redirect(url_for('login.html'))
-    return render_template("leader.html")
+    # if 'user' not in session:
+    #     return redirect(url_for('login'))
+    return render_template("leader.html", rankPercent = rankByPercent(), rankWin =rankByWins())
 
 @app.route('/account', methods = ['GET'])
 def account():
@@ -163,12 +163,34 @@ def logout():
 @app.route('/game', methods = ['GET'])
 def game():
     if 'user' not in session:
-        return redirect(url_for('login.html'))
+        return redirect(url_for('login'))
     return render_template("game.html")
 
 @app.route('/how', methods = ['GET'])
 def how():
     return render_template("how.html")
+
+
+def rankByPercent():
+    fullStat = db.ranks()
+    for person in fullStat:
+        if (int(fullStat.get(person)[1])):
+            percentage = (int((float(fullStat.get(person)[0]) / float(fullStat.get(person)[1])) * 100 ))
+            fullStat[person] = percentage
+    rank = (list(reversed(sorted(fullStat.items(), key = lambda kv:(kv[1], kv[0])))))
+    return rank
+
+def rankByWins():
+    fullStat = db.ranks()
+    # for person in fullStat:
+    #     if (int(fullStat.get(person)[1])):
+    #         percentage = (int((float(fullStat.get(person)[0]) / float(fullStat.get(person)[1])) * 100 ))
+    #         fullStat[person] = percentage
+    rank = (list(reversed(sorted(fullStat.items(), key = lambda kv:(kv[1], kv[0])))))
+    return rank
+print (rankByPercent())
+
+print (rankByWins()[0][0])
 
 
 if __name__ == "__main__":
