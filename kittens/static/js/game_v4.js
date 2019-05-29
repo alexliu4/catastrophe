@@ -67,13 +67,13 @@ var make_deck = function(){
 	var type = types[i];
 	for (j = 0; j < 4; j+=1){
 	    card = make_card(type);
-	    card.addEventListener("click", move_deck_card);
+	    card.addEventListener("click", draw);
 	    deck.push(card)
 	}
     }
 
     var diffuse = make_card("diffuse");
-    diffuse.addEventListener("click", move_deck_card);
+    diffuse.addEventListener("click", draw);
     deck.push(diffuse);
 };
 
@@ -92,7 +92,7 @@ var setup = function(){
     make_my_hand();
     make_opponent_hand();
     var explode = make_card("explode");
-    explode.addEventListener("click", move_deck_card);
+    explode.addEventListener("click", draw);
     deck.push(explode);
     shuffle(deck);
 
@@ -131,7 +131,7 @@ var make_my_hand = function(){
 	//card.addEventListener("click", move);
 	card.addEventListener("mouseover", hover);
 	card.addEventListener("mouseleave", reset_position);
-	card.removeEventListener("click", move_deck_card);
+	card.removeEventListener("click", draw);
 	card.addEventListener("click", move_center);
 	my_hand.push(card);
     };
@@ -155,113 +155,32 @@ var make_opponent_hand = function(){
 
 };
 
-
-/*
-Animation to move the deck card from the deck to the hand
-Work in progress.....
-*/
-var move_deck_card = function(e){
-    var card = e.target;
-    var requestID = 0;
-    var type = card.getAttribute("type");
-    card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
-    /*
-    var move = function(){
-	c.removeChild(card);
-	prev = Number(card.getAttribute("x"));
-	card.setAttribute("x", 0);
-	card.setAttribute("y", 400);
-	c.appendChild(card);
-	window.cancelAnimationFrame(requestID)
-	requestID = window.requestAnimationFrame(move);
-	if (prev > 300 ){
-	    window.cancelAnimationFrame(requestID);
-	};
-    };
-    */
-    card.setAttribute("x", 0);
-    card.setAttribute("y", 400);
-
-    console.log(deck_length)
-    //move();
-    /*
-    document.addEventListener("click", function (e) {
-	e.stopPropagation();
-	console.log('stopped')
-    }, true);
-
-
-    document.addEventListener("mouseover", function (e) {
-	e.stopPropagation();
-	console.log('stopped')
-    }, true);
-    turn_tracker.innerHTML = "OPPONENT'S TURN"
-    */
-};
-
-var draw_from_deck = function(e){
-    
-};
-
-var move_to = function(card, location){
-    var destination_x;
-    var destination_y;
-    if (location == "opponent"){
-	destination_x = 1020;
-	destination_y = 0;
-    }
-
-    else if (location == "player"){
-	destination_x = 1020;
-	destination_y = 420;
-    }
-
-    else{
-	console.log("location not valid");
-	return;
-    }
-
-    var requestID = 0;
-    var place = function(){
-	c.removeChild(card);
-	var prev_y = Number(card.getAttribute("y"));
-	var prev_x = Number(card.getAttribute("x"));
-
-	var x_inc = (destination_x - prev_x)/10;
-	var y_inc = (destination_y - prev_y)/10;
-
-	card.setAttribute("y", prev_y + y_inc);
-	card.setAttribute("x", prev_x + x_inc);
-	c.appendChild(card);
-	//cancel before animating in case  clicked multiple times
-	window.cancelAnimationFrame(requestID)
-	requestID = window.requestAnimationFrame(place);
-	if (Math.abs(prev_y - destination_y) >= 1 ){
-	    window.cancelAnimationFrame(requestID);
-	};
-    };
-    place();
-    card.setAttribute("y", destination_y);
-    card.setAttribute("x", destination_x);
-};
-
 /*
 Draw a card
 */
 var draw = function(e){
+    e.stopPropagation();
     var card = deck.pop();
-    var card = e.target;
+    console.log(card)
+    card = e.target;
+    console.log(card)
     my_hand.push(card);
     var type = card.getAttribute("type");
     card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
+    arrange_cards(my_hand);
 };
 
 /*
 Rearrange the spacing of the cards every time one is added to the hand
 */
-var arrange_cards = function(){
-    
-};
+var arrange_cards = function(hand){
+    var i;
+    for (i = 0; i < hand.length; i+=1){
+	var card = hand[i];
+	card.setAttribute("x", 100 + i*900/hand.length);
+	card.setAttribute("y", 400);
+    }
+}
 
 /*
 Target should lift up when hovered over
