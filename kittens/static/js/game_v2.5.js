@@ -229,19 +229,34 @@ var attack = function(target){
 var drawfrombottom = function(target){
 
 }
+
+var arrange_cards = function(hand){
+    var i;
+    for (i = 0; i < hand.length; i+=1){
+	var card = hand[i];
+	card.setAttribute("x", 100 + i*900/hand.length);
+	card.setAttribute("y", 400);
+    }
+}
 var favor = function(target){
-  console.log("before favor")
-  console.log(opponent_hand)
-  console.log(my_hand)
+  // console.log("before favor")
+  // console.log(opponent_hand)
+  // console.log(my_hand)
 
   opponentlength =  opponent_hand.length
   favor_card = opponent_hand[opponent_hand.length-1]
   opponent_hand.pop(opponent_hand.length-1)
   my_hand.push(favor_card)
+  var type = favor_card.getAttribute("type");
+  favor_card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
 
-  console.log("after favor")
-  console.log(opponent_hand)
-  console.log(my_hand)
+  arrange_cards(my_hand)
+
+
+  //
+  // console.log("after favor")
+  // console.log(opponent_hand)
+  // console.log(my_hand)
 }
 
 favor2.addEventListener('click', function(e){
@@ -256,7 +271,7 @@ var main = function() {
   var num_deck = deck.length;
   var gauge_val = 0;
   setup();
-  favor();
+  // favor();
 
 
 
