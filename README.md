@@ -5,7 +5,9 @@
 
 ## What is the Exploding Kittens?
 
-_Exploding Kittens_ is a gaming website for players to go against each other or a computer in a simple game of chance and tactics. The rules can be seen on the how to page.
+_Exploding Kittens_ is a gaming website for players to go against each other or a computer in a simple game of chance and tactics. The rules can be seen on the how to page of our site!
+
+The official site for the game can be found [here] (https://explodingkittens.com/).
 
 ## How do I run this on my machine?
 
@@ -62,7 +64,7 @@ This should return the current version of Python installed on your computer. Ple
 
 If you do not have Python, you can download the latest version [here](https://www.python.org/downloads/), which should come with `pip` installed.
 
-To recursively download the required modules, run the following commands:
+To download the required modules, run the following commands:
 
 ```bash
 cd path/to/cloned/repo
@@ -70,6 +72,18 @@ pip install -r < requirements.txt
 ```
 
 This will change the current working directory to the cloned repo directory, then recursively install all the dependencies listed in the [requirements.txt](../master/requirements.txt) file located in the root of the repo directory. _Note: This assumes that you do not have a virtual environment to work in. If you do, please do activate it or create a new environment in order to keep your current versions._
+
+More information about the packages are available on the bottom of the page along with instructions to download them individually.
+
+
+## Final Steps
+
+```
+Open a web browser and navigate to the link http://127.0.0.1:5000/.
+
+Then register if you are a new user or login if you are an existing user to play our game and have us save your stats.
+Most importantly have fun on our site!
+```
 
 ### Packages Required
 
