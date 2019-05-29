@@ -94,6 +94,8 @@ Then register if you are a new user or login if you are an existing user to play
 Most importantly have fun on our site!
 ```
 
+---
+
 ### Packages Required
 
 - urllib
