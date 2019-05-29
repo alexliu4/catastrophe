@@ -238,30 +238,6 @@ var arrange_cards = function(hand){
 	card.setAttribute("y", 400);
     }
 }
-var favor = function(target){
-  // console.log("before favor")
-  // console.log(opponent_hand)
-  // console.log(my_hand)
-
-  opponentlength =  opponent_hand.length
-  favor_card = opponent_hand[opponent_hand.length-1]
-  opponent_hand.pop(opponent_hand.length-1)
-  my_hand.push(favor_card)
-  var type = favor_card.getAttribute("type");
-  favor_card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
-
-  arrange_cards(my_hand)
-
-
-  //
-  // console.log("after favor")
-  // console.log(opponent_hand)
-  // console.log(my_hand)
-}
-
-favor2.addEventListener('click', function(e){
-  favor(e)
-})
 
 
 var main = function() {

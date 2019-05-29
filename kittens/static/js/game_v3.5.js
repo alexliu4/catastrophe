@@ -1,5 +1,6 @@
 //get canvas
 var c = document.getElementById("play_area");
+var favorButton = document.getElementById("favor")
 
 //tracks turns
 var turn_tracker = document.getElementById("turn_tracker")
@@ -314,7 +315,7 @@ var favor = function(target){
 }
 
 var endGame = function() {
-  
+
 }
 var gauge_val = 0;
 var OnStartTurn = function () {
@@ -375,7 +376,7 @@ var main = function() {
     var num_moves = 0;
     var turn = 1;
     var num_deck = deck.length;
-    
+
     setup();
 
 
@@ -396,4 +397,3 @@ var main = function() {
 
 }
 main();
-

@@ -1,5 +1,6 @@
 //get canvas
 var c = document.getElementById("play_area");
+var favorButton = document.getElementById("favor")
 
 //tracks turns
 var turn_tracker = document.getElementById("turn_tracker")
@@ -165,7 +166,7 @@ var draw = function(e){
     card.addEventListener("mouseleave", reset_position);
     card.removeEventListener("click", draw);
     card.addEventListener("click", move_center);
-    
+
     //console.log(card.getAttribute("type"))
     //card = e.target;
     //console.log(card.getAttribute("type"))
@@ -256,6 +257,31 @@ var drawfrombottom = function(target){
 var favor = function(target){
 
 }
+
+var favor = function(target){
+  console.log("before favor")
+  console.log(opponent_hand)
+  console.log(my_hand)
+
+  opponentlength =  opponent_hand.length
+  favor_card = opponent_hand[opponent_hand.length-1]
+  opponent_hand.pop(opponent_hand.length-1)
+  my_hand.push(favor_card)
+  var type = favor_card.getAttribute("type");
+  favor_card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
+
+  arrange_cards(my_hand)
+
+
+
+  console.log("after favor")
+  console.log(opponent_hand)
+  console.log(my_hand)
+}
+
+favorButton.addEventListener('click', function(e){
+  favor(e)
+})
 
 
 var main = function() {
