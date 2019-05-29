@@ -161,9 +161,14 @@ Draw a card
 var draw = function(e){
     e.stopPropagation();
     var card = deck.pop();
-    console.log(card)
-    card = e.target;
-    console.log(card)
+    card.addEventListener("mouseover", hover);
+    card.addEventListener("mouseleave", reset_position);
+    card.removeEventListener("click", draw);
+    card.addEventListener("click", move_center);
+    
+    //console.log(card.getAttribute("type"))
+    //card = e.target;
+    //console.log(card.getAttribute("type"))
     my_hand.push(card);
     var type = card.getAttribute("type");
     card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
