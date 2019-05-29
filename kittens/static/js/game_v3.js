@@ -183,10 +183,8 @@ var move_deck_card = function(e){
     card.setAttribute("y", 300);
 
     console.log(deck_length)
-<<<<<<< HEAD
-=======
+
     // move();
->>>>>>> fb4fc52da3d06ba594e9bcebbab1aa8c22d8623b
     /*
     document.addEventListener("click", function (e) {
 	e.stopPropagation();
@@ -229,6 +227,7 @@ var arrange_cards = function(hand){
     for (i = 0; i < hand.length; i+=1){
         card = hand[i];
         card.setAttribute("x", 100 + i * (900 / hand.length)); // 100 - 800
+        card.setAttribute("y", 400);
       }
       // card.setAttribute("y", 400);
 
