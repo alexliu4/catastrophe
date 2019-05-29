@@ -5,94 +5,18 @@
 
 ## What is the Exploding Kittens?
 
-_Exploding Kittens_ is a gaming website for players to go against each other or a computer in a simple game of chance and tactics.
+_Exploding Kittens_ is a gaming website for players to go against each other or a computer in a simple game of chance and tactics. The rules can be seen on the how to page.
 
 ## How do I run this on my machine?
 
 When you are ready, go to your terminal and change your directory to where your would like to clone the repo, then run the below command:
 
 ```bash
-git clone https://github.com/PGreatness/import-Greatness.git
+git clone https://github.com/alexliu4/catastrophe.git
 ```
 
 This will make a HTTPS clone of the repo. Another option is to download the ZIP folder after clicking `Clone or download` on GitHub, then extracting it to your desired location.
 _This project requires the dependencies listed on the [Dependencies](../master/README.md/#dependencies) section in order to run. Please have them downloaded before continuing._
-
-In order to make use of _The Daily Bugle_, you will need the API keys for the APIs that require one. So far, you will need **2** API keys.
-For these, the links to get the API keys are listed below:
-
-- [DarkSky API](https://darksky.net/dev)
-- [New York Times](https://developer.nytimes.com/)
-
-Before we delve into the explanation, it is imperative that you are in the correct build. Open a terminal and run the following command to go to the distribution build.
-
-```bash
-cd path/to/repo/The/ Daily/ Bugle/distr/
-```
-
-This build has a `keys.json` file located in `data/API_Keys`. Open a terminal in the `data/API_Keys` folder and run these commands to replace the placeholders with your API Keys. Remember to activate your `virtual environment` to aviod any collatoral damage.
-
-```bash
-source path/to/virtual/environment/Scripts/activate #for Windows
-. path/to/virtual/environment/bin/activate #for Linux/OS
-
-nano keys.json
-```
-
-From there, enter your API keys by overwriting the placeholder, `Your_DarkSky_API_Key` overwritten by your DarkSky API key and `Your_NYTimes_API_Key` overwritten by your New York Times API Key. **The quotation marks("") are required and must not be deleted.**
-
-If you do not have either of the keys, look at the subsection below to on how to get the keys.
-
-### **For DarkSky API**
-
-[Click here to go to the DarkSky API](https://darksky.net/dev)
-
-Click on `Sign Up`, and register for an account. After this, you should be given an API key. Copy this key into your clipboard and go to the terminal.
-
-Run the following command to open the JSON file.
-
-```bash
-nano keys.json
-```
-
-With the JSON file open, replace `Your_DarkSky_API_Key` with your DarkSky API key.
-
-```bash
-{
-    "Weather" : "Your_DarkSky_API_Key"
-}
-```
-
-### **For New York Times API**
-
-[Click here to go the New York Times API](https://developer.nytimes.com/)
-
-Click on `Get API Key` in the top right corner. Fill out the required information and, where it asks for the API, select `Top Stories`. **_This is a very important part since The Daily Bugle will not work without the correct API selected._**
-
-Afterwards, click on `Create API Key`. Your API key should appear in your email shortly. Copy the API and go back to the terminal to execute this command.
-
-```bash
-nano keys.json
-```
-
-Your JSON file should look like this at this point:
-
-```bash
-{
-    "Weather" : "Your_DarkSky_API_Key"
-}
-```
-
-Replace `Your_NYTimes_API_Key` with your New York Times API key. **Remember that the quotation marks("") are required and should not be deleted.**
-
-```bash
-{
-    "Weather" : "Your_DarkSky_API_Key",
-    "News" : "Your_NYTimes_API_Key"
-}
-```
-
-_It is important to note that the order in which the `Weather` and `News` appear is irrelevant._
 
 Now your program is ready to go! On your terminal, run the following commands:
 
@@ -229,12 +153,4 @@ pip install jinja2
 
 ```bash
 pip install passlib
-```
-
-- Datetime
-
-`Datetime` is a Python library used to get the current date and time. This is used to set limits on refreshes to avoid rate limits being exceeded. It can be installed with the following command:
-
-```bash
-pip install datetime
 ```
