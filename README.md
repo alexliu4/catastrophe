@@ -11,7 +11,7 @@ The official site for the game can be found [here](https://explodingkittens.com/
 
 ## How do I run this game online?
 
-You can visit our live site [here](http://142.93.26.206.119).
+You can visit our live site [here](http://142.93.206.119).
 But if you want to run our program locally you can continue to the steps below.
 
 ## How do I run this on my machine?
