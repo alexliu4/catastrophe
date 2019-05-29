@@ -42,10 +42,10 @@ var shuffle = function(array){
     var i, j, temp;
 
     for (i = array.length - 1; i > 0; i -= 1) {
-    	j = Math.floor(Math.random() * (i + 1))
-    	temp = array[i]
-    	array[i] = array[j]
-    	array[j] = temp
+	j = Math.floor(Math.random() * (i + 1))
+	temp = array[i]
+	array[i] = array[j]
+	array[j] = temp
     }
 };
 
@@ -64,12 +64,12 @@ var make_deck = function(){
 	"skip"
     ]
     for (i = 0; i < 5; i+=1){
-    	var type = types[i];
-    	for (j = 0; j < 4; j+=1){
-    	    card = make_card(type);
-    	    card.addEventListener("click", move_deck_card);
-    	    deck.push(card)
-    	}
+	var type = types[i];
+	for (j = 0; j < 4; j+=1){
+	    card = make_card(type);
+	    card.addEventListener("click", move_deck_card);
+	    deck.push(card)
+	}
     }
 
     var diffuse = make_card("diffuse");
@@ -98,14 +98,14 @@ var setup = function(){
 
     //adds the hand images to the canvas
     for (i = 0; i < deck.length; i+=1){
-    	var card = deck[i];
-    	c.appendChild(card);
+	var card = deck[i];
+	c.appendChild(card);
     }
     for (i = 0; i < my_hand.length; i+=1){
-    	var card = my_hand[i];
-    	c.appendChild(card);
-    	card = opponent_hand[i];
-    	c.append(card);
+	var card = my_hand[i];
+	c.appendChild(card);
+	card = opponent_hand[i];
+	c.append(card);
     }
 };
 
@@ -115,43 +115,43 @@ Adds the hover and place event listeners
 Removes the deck event listener
 */
 var make_my_hand = function(){
-  for (i = 0; i < 5; i+=1){
-  	if (i == 0){
-  	    card = make_card("diffuse");
-  	}
-  	else{
-  	    var card = deck.pop();
-  	}
-  	card.setAttribute("x", 100 + i*200);
-  	card.setAttribute("y", 400);
+    for (i = 0; i < 5; i+=1){
+	if (i == 0){
+	    card = make_card("diffuse");
+	}
+	else{
+	    var card = deck.pop();
+	}
+	card.setAttribute("x", 100 + i*200);
+	card.setAttribute("y", 400);
 
-  	var type = card.getAttribute("type");
+	var type = card.getAttribute("type");
 
-  	card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
-  	//card.addEventListener("click", move);
-  	card.addEventListener("mouseover", hover);
-  	card.addEventListener("mouseleave", reset_position);
-  	card.removeEventListener("click", move_deck_card);
-  	card.addEventListener("click", move_center);
-  	my_hand.push(card);
-  };
+	card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
+	//card.addEventListener("click", move);
+	card.addEventListener("mouseover", hover);
+	card.addEventListener("mouseleave", reset_position);
+	card.removeEventListener("click", move_deck_card);
+	card.addEventListener("click", move_center);
+	my_hand.push(card);
+    };
 };
 
 /*
 Adds 4 cards from the deck plus one diffuse to opponent's hand
 */
 var make_opponent_hand = function(){
-  for (i = 0; i < 5; i+=1){
-  	if (i == 0){
-  	    card = make_card("diffuse");
-  	}
-  	else{
-  	    var card = deck.pop();
-  	}
-  	card.setAttribute("x", 100 + i*200);
-  	card.setAttribute("y", 0);
-  	opponent_hand.push(card);
-  };
+    for (i = 0; i < 5; i+=1){
+	if (i == 0){
+	    card = make_card("diffuse");
+	}
+	else{
+	    var card = deck.pop();
+	}
+	card.setAttribute("x", 100 + i*200);
+	card.setAttribute("y", 0);
+	opponent_hand.push(card);
+    };
 
 };
 
@@ -179,14 +179,11 @@ var move_deck_card = function(e){
 	};
     };
     */
-    card.setAttribute("x", 200);
-    card.setAttribute("y", 300);
+    card.setAttribute("x", 0);
+    card.setAttribute("y", 400);
 
     console.log(deck_length)
-<<<<<<< HEAD
-=======
-    // move();
->>>>>>> fb4fc52da3d06ba594e9bcebbab1aa8c22d8623b
+    move();
     /*
     document.addEventListener("click", function (e) {
 	e.stopPropagation();
@@ -200,10 +197,6 @@ var move_deck_card = function(e){
     }, true);
     turn_tracker.innerHTML = "OPPONENT'S TURN"
     */
-    my_hand.push(card);
-    // console.log(my_hand);
-    arrange_cards(my_hand);
-    // arrange_cards(opponent_hand);
 };
 
 /*
@@ -215,24 +208,23 @@ var draw = function(e){
     my_hand.push(card);
     var type = card.getAttribute("type");
     card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
-    // arrange_cards(my_hand);
-    // arrange_cards(opponent_hand);
-
 };
 
 /*
 Rearrange the spacing of the cards every time one is added to the hand
 */
 var arrange_cards = function(hand){
-    // card.setAttribute("x", 100 + i * (800 / len(hand))); // 100 - 800
-    var card;
-    for (i = 0; i < hand.length; i+=1){
-        card = hand[i];
-        card.setAttribute("x", 100 + i * (900 / hand.length)); // 100 - 800
+    card.setAttribute("x", 100 + i * (800 / len(hand))); // 100 - 800
+    for (i = 0; i < 5; i+=1){
+      if (i == 0){
+        card = make_card("diffuse");
       }
-      // card.setAttribute("y", 400);
-
-  }
+      else{
+        var card = deck.pop();
+      }
+      card.setAttribute("x", 100 + i*200);
+      card.setAttribute("y", 400);
+    }
 
 
   //   var shift = function(){
@@ -249,7 +241,7 @@ var arrange_cards = function(hand){
   //   }
   //
   //   shift();
-  // }
+}
 
 /*
 Target should lift up when hovered over
@@ -321,64 +313,87 @@ var favor = function(target){
 
 }
 
+var endGame = function() {
+  
+}
+var gauge_val = 0;
+var OnStartTurn = function () {
+  document.addEventListener('click', function(e){
+    if (1==0) {
+      //draw
+      console.log("hi");
+      console.log(e.target.getAttribute("type"));
+      updateGauge(gauge_val + 5) //replace w/ calculated value
+    }
+    else{
+      console.log(e.target.getAttribute("type"));
+      var move = e.target.getAttribute("type");
+      if (move == 'shuffle') {shuffle(deck);}
+      else if (move == 'skip') {opponentTurn(); return}
+      else{}
+
+    }
+  })
+}
+
+var opponentTurn = function() {
+  //document.addEventListener('click', DisableClickOnPage.handler, true);
+
+  document.addEventListener("click", function (e) {
+    e.stopPropagation();
+    console.log('stopped')
+  }, true);
+
+
+  document.addEventListener("mouseover", function (e) {
+    e.stopPropagation();
+    console.log('stopped')
+  }, true);
+  console.log("time for opponent");
+
+  if (opponent_hand.length === 1) {
+    draw();
+    /*
+    [if exploding kitten drawn]
+    [ if defuse in card deck]
+    [use defuse card]
+    [else]
+    [game over boo hoo]
+    */
+    turn = 1;
+  }
+  if (gauge_val < 20) {
+    draw();
+    updateGauge(gauge_val + 5);
+    turn = 1;
+  }
+  console.log("opponent has gone.");
+}
 
 var main = function() {
     var game_going = true;
     var num_moves = 0;
     var turn = 1;
     var num_deck = deck.length;
-    var gauge_val = 0;
+    
     setup();
 
 
 
 
-    if(turn == 1){
+    //if(turn == 1){
 	// document.removeEventListener('click', DisableClickOnPage.handler, true);
 	// listen to player click & see what is clicked
-	document.addEventListener('click', function(e){
-	    if (1===0) {
-		//draw
-		console.log("hi");
-		console.log(e.target.getAttribute("type"));
-		updateGauge(gauge_val + 5) //replace w/ calculated value
-	    }
-	    else{
-		console.log(e.target.getAttribute("type"));
-		var move = e.target.getAttribute("type");
-		if (move == 'shuffle') {shuffle(deck);}
-		else if (move == 'skip') {turn = 2;}
-		else{}
-
-	    }
-	})
-    }
+	     OnStartTurn();
+  //  }
 
 
     //opponent turn ===============================================
-    if(turn == 2){
-	document.addEventListener('click', DisableClickOnPage.handler, true);
+//    if(turn == 2){
 
 
-	if (opponent_hand.length === 1) {
-	    draw();
-	    /*
-	      [if exploding kitten drawn]
-	      [ if defuse in card deck]
-	      [use defuse card]
-	      [else]
-	      [game over boo hoo]
-	    */
-	    turn = 1;
-	}
-	if (gauge_val < 20) {
-	    draw();
-	    updateGauge(gauge_val + 5);
-	    turn = 1;
-	}
-	console.log("opponent has gone.")
-
-    }
+  //  }
 
 }
 main();
+
