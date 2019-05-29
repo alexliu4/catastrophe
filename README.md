@@ -9,6 +9,11 @@ _Exploding Kittens_ is a gaming website for players to go against each other or 
 
 The official site for the game can be found [here] (https://explodingkittens.com/).
 
+## How do I run this game online?
+
+You can visit our live site [here](142.93.26.206.119).
+But if you want to run our program locally you can continue to the steps below.
+
 ## How do I run this on my machine?
 
 When you are ready, go to your terminal and change your directory to where your would like to clone the repo, then run the below command:
@@ -75,6 +80,7 @@ This will change the current working directory to the cloned repo directory, the
 
 More information about the packages are available on the bottom of the page along with instructions to download them individually.
 
+---
 
 ## Final Steps
 
