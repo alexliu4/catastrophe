@@ -7,7 +7,7 @@
 
 _Exploding Kittens_ is a gaming website for players to go against each other or a computer in a simple game of chance and tactics. The rules can be seen on the how to page of our site!
 
-The official site for the game can be found here [https://explodingkittens.com/].
+The official site for the game can be found [here] (https://explodingkittens.com/).
 
 ## How do I run this on my machine?
 
