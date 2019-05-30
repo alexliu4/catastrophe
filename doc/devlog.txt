@@ -159,3 +159,9 @@ AlexL -- 2019-05-26 11:54
 - Made it so that pages cannot be accessed without logging in
   other than the How To Play Page
 ==============================================================
+
+AlexL -- 2019-05-29 12:54
+--------------------------------------------------------------
+- Created the rearrange function to use when card are used or added
+  to hand (fixes/equalizes spacing between cards)
+==============================================================
