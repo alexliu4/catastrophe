@@ -68,13 +68,13 @@ var make_deck = function(){
 	var type = types[i];
 	for (j = 0; j < 4; j+=1){
 	    card = make_card(type);
-	    card.addEventListener("click", move_deck_card);
+	    card.addEventListener("click", draw);
 	    deck.push(card)
 	}
     }
 
     var diffuse = make_card("diffuse");
-    diffuse.addEventListener("click", move_deck_card);
+    diffuse.addEventListener("click", draw);
     deck.push(diffuse);
 };
 
@@ -93,7 +93,7 @@ var setup = function(){
     make_my_hand();
     make_opponent_hand();
     var explode = make_card("explode");
-    explode.addEventListener("click", move_deck_card);
+    explode.addEventListener("click", draw);
     deck.push(explode);
     shuffle(deck);
 
@@ -132,7 +132,7 @@ var make_my_hand = function(){
 	//card.addEventListener("click", move);
 	card.addEventListener("mouseover", hover);
 	card.addEventListener("mouseleave", reset_position);
-	card.removeEventListener("click", move_deck_card);
+	card.removeEventListener("click", draw);
 	card.addEventListener("click", move_center);
 	my_hand.push(card);
     };
@@ -156,92 +156,31 @@ var make_opponent_hand = function(){
 
 };
 
-
-/*
-Animation to move the deck card from the deck to the hand
-Work in progress.....
-*/
-var move_deck_card = function(e){
-    var card = e.target;
-    var requestID = 0;
-    var type = card.getAttribute("type");
-    card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
-    /*
-    var move = function(){
-	c.removeChild(card);
-	prev = Number(card.getAttribute("x"));
-	card.setAttribute("x", 0);
-	card.setAttribute("y", 400);
-	c.appendChild(card);
-	window.cancelAnimationFrame(requestID)
-	requestID = window.requestAnimationFrame(move);
-	if (prev > 300 ){
-	    window.cancelAnimationFrame(requestID);
-	};
-    };
-    */
-    card.setAttribute("x", 0);
-    card.setAttribute("y", 400);
-
-    console.log(deck_length)
-    move();
-    /*
-    document.addEventListener("click", function (e) {
-	e.stopPropagation();
-	console.log('stopped')
-    }, true);
-
-
-    document.addEventListener("mouseover", function (e) {
-	e.stopPropagation();
-	console.log('stopped')
-    }, true);
-    turn_tracker.innerHTML = "OPPONENT'S TURN"
-    */
-};
-
 /*
 Draw a card
 */
 var draw = function(e){
+    e.stopPropagation();
     var card = deck.pop();
-    var card = e.target;
+    console.log(card)
+    card = e.target;
+    console.log(card)
     my_hand.push(card);
     var type = card.getAttribute("type");
     card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
+    arrange_cards(my_hand);
 };
 
 /*
 Rearrange the spacing of the cards every time one is added to the hand
 */
 var arrange_cards = function(hand){
-    card.setAttribute("x", 100 + i * (800 / len(hand))); // 100 - 800
-    for (i = 0; i < 5; i+=1){
-      if (i == 0){
-        card = make_card("diffuse");
-      }
-      else{
-        var card = deck.pop();
-      }
-      card.setAttribute("x", 100 + i*200);
-      card.setAttribute("y", 400);
+    var i;
+    for (i = 0; i < hand.length; i+=1){
+	var card = hand[i];
+	card.setAttribute("x", 100 + i*900/hand.length);
+	card.setAttribute("y", 400);
     }
-
-
-  //   var shift = function(){
-	// c.removeChild(card);
-	// prev = Number(card.getAttribute("y"));
-	// card.setAttribute("y", prev-5);
-	// c.appendChild(card);
-	// //cancel before animating in case  clicked multiple times
-	// window.cancelAnimationFrame(requestID)
-	// requestID = window.requestAnimationFrame(shift);
-	// if (prev<370){
-	//     window.cancelAnimationFrame(requestID);
-	// };
-  //   }
-  //
-  //   shift();
 }
 
 /*
@@ -317,9 +256,12 @@ var favor = function(target){
 var endGame = function() {
 
 }
+
 var gauge_val = 0;
 var OnStartTurn = function () {
+  console.log("player turn")
   document.addEventListener('click', function(e){
+    
     if (1==0) {
       //draw
       console.log("hi");
@@ -327,10 +269,11 @@ var OnStartTurn = function () {
       updateGauge(gauge_val + 5) //replace w/ calculated value
     }
     else{
-      console.log(e.target.getAttribute("type"));
       var move = e.target.getAttribute("type");
+      console.log(move);
+
       if (move == 'shuffle') {shuffle(deck);}
-      else if (move == 'skip') {opponentTurn(); return}
+      else if (move == 'skip') {opponentTurn(); return;}
       else{}
 
     }
@@ -338,8 +281,8 @@ var OnStartTurn = function () {
 }
 
 var opponentTurn = function() {
-  //document.addEventListener('click', DisableClickOnPage.handler, true);
-
+  console.log("opponent turn starting")
+  //prevents users from clicking or hovering on cards while it is the opponent's turn.
   document.addEventListener("click", function (e) {
     e.stopPropagation();
     console.log('stopped')
@@ -352,23 +295,27 @@ var opponentTurn = function() {
   }, true);
   console.log("time for opponent");
 
-  if (opponent_hand.length === 1) {
-    draw();
-    /*
-    [if exploding kitten drawn]
-    [ if defuse in card deck]
-    [use defuse card]
-    [else]
-    [game over boo hoo]
-    */
-    turn = 1;
-  }
+  // if (opponent_hand.length == 1) {
+  //   draw();
+  //   /*
+  //   [if exploding kitten drawn]
+  //   [ if defuse in card deck]
+  //   [use defuse card]
+  //   [else]
+  //   [game over boo hoo]
+  //   */
+  //   turn = 1;
+  // }
+
   if (gauge_val < 20) {
-    draw();
+    console.log("gauge little")
+    //draw();
     updateGauge(gauge_val + 5);
-    turn = 1;
+    console.log("gauge done")
+    return;
   }
   console.log("opponent has gone.");
+  return;
 }
 
 var main = function() {
@@ -378,22 +325,8 @@ var main = function() {
     var num_deck = deck.length;
 
     setup();
-
-
-
-
-    //if(turn == 1){
-	// document.removeEventListener('click', DisableClickOnPage.handler, true);
-	// listen to player click & see what is clicked
-	     OnStartTurn();
-  //  }
-
-
-    //opponent turn ===============================================
-//    if(turn == 2){
-
-
-  //  }
-
+    while (game_going) {
+	  OnStartTurn();
+  }
 }
 main();
