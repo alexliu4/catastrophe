@@ -8,16 +8,102 @@
 _Exploding Kittens_ is a gaming website for players to go against each other or a computer in a simple game of chance and tactics. The rules can be seen on the how to page of our site!
 
 The official site for the game can be found [here](https://explodingkittens.com/).
+You can visit our live site for our game [here](http://142.93.206.119).
+
+## Video
+A demo of our game _Exploding Kittens_ is available [here](https://www.youtube.com/watch?v=nXIXDYl5bws).
 
 ---
 
-## How do I run this game online?
+## Launch instructions
 
-You can visit our live site [here](http://142.93.206.119).
+### How do I run this game online? (run on Apache2)
+
+To host our game on your own droplet, you must first create a Digital Ocean account.
+Then, create DigitalOcean droplet running ubuntu v18.04 x64.
+
+* Install apache2
+ ```
+ $ sudo apt install apache2
+ ```
+
+**REMEMBER**: Update your packages. Use the commands...
+
+```
+sudo apt update
+sudo apt upgrade
+```
+
+```
+#!/usr/bin/python
+import sys
+sys.path.insert(0,"/var/www/<appname>/")
+
+from <appname> import app as application
+```
+- Change app to match name of flask object in **\_\_init_\_.py**
+
+* Change the directory to the root directory of your new account: ```$ cd```
+
+* Clone this repository into your root directory
+```
+$ git clone https://github.com/alexliu4/catastrophe.git
+```
+
+* Installing pip3 dependencies
+```
+$ sudo -H pip3 install -r kittens/kittens/requirements.txt
+```
+
+* Add `www-data` write permissions to folder
+```
+$ sudo chgrp -R www-data kittens
+$ sudo chmod -R g+w kittens
+```
+    * Note that files in this folder are now write-protected. You must be in `sudo` mode to edit.
+
+* Move the project folder into `/var/www`
+```
+$ sudo mv kittens /var/www
+$ sudo cd /var/www
+```
+
+* Put `.conf` file in web serving config folder
+```
+$ sudo mv /var/www/kittens/kittens.conf /etc/apache2/sites-available
+```
+The project should look similar to this:
+```
+wolframbeta/
+├── wolframbeta
+│   ├── __init__.py
+│   ├── data
+│   ├── static
+│   ├── templates
+│   └── util
+├── wolframbeta.conf
+└── wolframbeta.wsgi
+```
+
+* Enable apache2
+```
+$ sudo a2ensite kittens
+```
+
+* Enable WSGI module
+```
+$ sudo a2enmod wsgi
+```
+
+* Reload and restart apache2
+```
+$ sudo service apache2 reload
+$ sudo service apache2 restart
+```
+
 But if you want to run our program locally you can continue to the steps below.
 
-
-## How do I run this on my machine?
+### How do I run this on my machine? (localhost)
 
 When you are ready, go to your terminal and change your directory to where your would like to clone the repo, then run the below command:
 
@@ -54,13 +140,17 @@ http://127.0.0.1:500/
 
 This will take you to the `localhost` where your can the project working in all of its glory!
 
+In order to terminate the program, press <kbd> CTRL </kbd> + <kbd> C </kbd>. (This will close the server instance.)
+
+To close your virtual environment, run the command `$ deactivate`.
+
 ---
 
 ## Dependencies
 
 Although not one of the biggest projects, _catastrophe_ still uses quite a few modules. For a more exhaustive list, along with tested versions, see the [Requirements](../master/requirements.txt) plaintext file.
 
-### **Recursive Download**
+### **Download**
 
 If you wish to download all of the modules listed below, you can do so easily. First, make sure that you have `Python`. Run the following in your terminal:
 
@@ -85,7 +175,7 @@ More information about the packages are available on the bottom of the page alon
 
 ---
 
-## Final Steps
+### Final Steps
 
 ```
 Open a web browser and navigate to the link http://127.0.0.1:5000/.
