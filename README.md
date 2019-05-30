@@ -22,7 +22,84 @@ A demo of our game _Exploding Kittens_ is available [here](https://www.youtube.c
 To host our game on your own droplet, you must first create a Digital Ocean account.
 Then, create DigitalOcean droplet running ubuntu v18.04 x64.
 
+* Install apache2
+ ```
+ $ sudo apt install apache2
+ ```
 
+**REMEMBER**: Update your packages. Use the commands...
+
+```
+sudo apt update
+sudo apt upgrade
+```
+
+```
+#!/usr/bin/python
+import sys
+sys.path.insert(0,"/var/www/<appname>/")
+
+from <appname> import app as application
+```
+- Change app to match name of flask object in **\_\_init_\_.py**
+
+* Change the directory to the root directory of your new account: ```$ cd```
+
+* Clone this repository into your root directory
+```
+$ git clone https://github.com/alexliu4/catastrophe.git
+```
+
+* Installing pip3 dependencies
+```
+$ sudo -H pip3 install -r kittens/kittens/requirements.txt
+```
+
+* Add `www-data` write permissions to folder
+```
+$ sudo chgrp -R www-data kittens
+$ sudo chmod -R g+w kittens
+```
+    * Note that files in this folder are now write-protected. You must be in `sudo` mode to edit.
+
+* Move the project folder into `/var/www`
+```
+$ sudo mv kittens /var/www
+$ sudo cd /var/www
+```
+
+* Put `.conf` file in web serving config folder
+```
+$ sudo mv /var/www/kittens/kittens.conf /etc/apache2/sites-available
+```
+The project should look similar to this:
+```
+wolframbeta/
+├── wolframbeta
+│   ├── __init__.py
+│   ├── data
+│   ├── static
+│   ├── templates
+│   └── util
+├── wolframbeta.conf
+└── wolframbeta.wsgi
+```
+
+* Enable apache2
+```
+$ sudo a2ensite kittens
+```
+
+* Enable WSGI module
+```
+$ sudo a2enmod wsgi
+```
+
+* Reload and restart apache2
+```
+$ sudo service apache2 reload
+$ sudo service apache2 restart
+```
 
 But if you want to run our program locally you can continue to the steps below.
 
