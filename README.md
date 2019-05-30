@@ -8,16 +8,25 @@
 _Exploding Kittens_ is a gaming website for players to go against each other or a computer in a simple game of chance and tactics. The rules can be seen on the how to page of our site!
 
 The official site for the game can be found [here](https://explodingkittens.com/).
+You can visit our live site for our game [here](http://142.93.206.119).
+
+## Video
+A demo of our game _Exploding Kittens_ is available [here](https://www.youtube.com/watch?v=nXIXDYl5bws).
 
 ---
 
-## How do I run this game online?
+## Launch instructions
 
-You can visit our live site [here](http://142.93.206.119).
+### How do I run this game online? (run on Apache2)
+
+To host our game on your own droplet, you must first create a Digital Ocean account.
+Then, create DigitalOcean droplet running ubuntu v18.04 x64.
+
+
+
 But if you want to run our program locally you can continue to the steps below.
 
-
-## How do I run this on my machine?
+### How do I run this on my machine? (localhost)
 
 When you are ready, go to your terminal and change your directory to where your would like to clone the repo, then run the below command:
 
@@ -54,13 +63,17 @@ http://127.0.0.1:500/
 
 This will take you to the `localhost` where your can the project working in all of its glory!
 
+In order to terminate the program, press <kbd> CTRL </kbd> + <kbd> C </kbd>. (This will close the server instance.)
+
+To close your virtual environment, run the command `$ deactivate`.
+
 ---
 
 ## Dependencies
 
 Although not one of the biggest projects, _catastrophe_ still uses quite a few modules. For a more exhaustive list, along with tested versions, see the [Requirements](../master/requirements.txt) plaintext file.
 
-### **Recursive Download**
+### **Download**
 
 If you wish to download all of the modules listed below, you can do so easily. First, make sure that you have `Python`. Run the following in your terminal:
 
@@ -85,7 +98,7 @@ More information about the packages are available on the bottom of the page alon
 
 ---
 
-## Final Steps
+### Final Steps
 
 ```
 Open a web browser and navigate to the link http://127.0.0.1:5000/.
