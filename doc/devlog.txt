@@ -175,3 +175,8 @@ AlexL -- 2019-05-29 12:54
 - Created the rearrange function to use when card are used or added
   to hand (fixes/equalizes spacing between cards)
 ==============================================================
+
+MichelleT -- 2019-05-29 1:57
+--------------------------------------------------------------
+- Completed favor in the cards and animations
+==============================================================
