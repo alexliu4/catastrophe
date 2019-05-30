@@ -150,6 +150,7 @@ var make_opponent_hand = function(){
 	}
 	card.setAttribute("x", 100 + i*200);
 	card.setAttribute("y", 0);
+	card.removeEventListener("click", draw);
 	opponent_hand.push(card);
     };
 
