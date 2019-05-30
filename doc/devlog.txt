@@ -1,6 +1,6 @@
 catastrophe
-Karen Li aka Karenicus
-Alex Liu aka Pmal
+Karen Li aka karenicus
+Alex Liu aka pmal
 Michelle Tang aka mtang
 Maggie Zhao aka mzhao
 
@@ -201,4 +201,9 @@ KarenL -- 2019-05-30 19:30
 AlexL -- 2019-05-30 13:43
 --------------------------------------------------------------
 - Updated README
+==============================================================
+
+MichelleT -- 2019-05-30 3:28
+--------------------------------------------------------------
+- Completed shuffle and draw from bottom card functionality
 ==============================================================
