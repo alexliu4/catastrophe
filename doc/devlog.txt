@@ -170,7 +170,8 @@ AlexL -- 2019-05-26 11:54
   other than the How To Play Page
 ==============================================================
 
-MichelleT -- 2019-05-29 12:51
+AlexL -- 2019-05-29 12:54
 --------------------------------------------------------------
-- Added favor (cards and animation)
+- Created the rearrange function to use when card are used or added
+  to hand (fixes/equalizes spacing between cards)
 ==============================================================

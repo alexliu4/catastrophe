@@ -151,6 +151,7 @@ var make_opponent_hand = function(){
 	}
 	card.setAttribute("x", 100 + i*200);
 	card.setAttribute("y", 0);
+	card.removeEventListener("click", draw);
 	opponent_hand.push(card);
     };
 
@@ -220,7 +221,7 @@ var reset_position = function(e){
 
 var move_center = function(e){
     var requestID = 0;
-    card = e.target;
+    var card = e.target;
     var place = function(){
 	c.removeChild(card);
 	var prev_y = Number(card.getAttribute("y"));
