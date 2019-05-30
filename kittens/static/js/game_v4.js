@@ -254,9 +254,6 @@ var attack = function(target){
 var drawfrombottom = function(target){
 
 }
-var favor = function(target){
-
-}
 
 var favor = function(target){
   console.log("before favor")
