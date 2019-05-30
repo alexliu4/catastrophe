@@ -221,7 +221,7 @@ var reset_position = function(e){
 
 var move_center = function(e){
     var requestID = 0;
-    card = e.target;
+    var card = e.target;
     var place = function(){
 	c.removeChild(card);
 	var prev_y = Number(card.getAttribute("y"));
