@@ -219,9 +219,20 @@ var reset_position = function(e){
 
 }
 
+var remove_card = function(hand, type){
+    var i;
+    for (i = 0; i < hand.length; i+=1){
+	if (hand[i].getAttribute("type") == type){
+	    hand.splice(i, 1);
+	    break;
+	}
+    }
+};
+
 var move_center = function(e){
     var requestID = 0;
     var card = e.target;
+    remove_card(my_hand, card.getAttribute("type"));
     var place = function(){
 	c.removeChild(card);
 	var prev_y = Number(card.getAttribute("y"));
@@ -244,6 +255,7 @@ var move_center = function(e){
     card.removeEventListener("mouseover", hover);
     card.removeEventListener("mouseleave", reset_position);
     card.removeEventListener("click", move_center);
+    arrange_cards(my_hand);
 
 }
 
