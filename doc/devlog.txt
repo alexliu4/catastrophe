@@ -202,3 +202,11 @@ AlexL -- 2019-05-30 13:43
 --------------------------------------------------------------
 - Updated README
 ==============================================================
+
+AlexL -- 2019-05-31 12:54
+--------------------------------------------------------------
+- Worked on the account.html page
+- Made db functions to store profile pictures
+- found 7 cute photos to use as a pfp
+- created photo.html to choose the picture
+==============================================================

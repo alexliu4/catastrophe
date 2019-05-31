@@ -6,7 +6,7 @@ def add_user(username, hashed_pass):
     '''adds users to use table'''
     db = sqlite3.connect(DB)
     c = db.cursor()
-    command = "INSERT INTO users (username,password, win, total)VALUES(?,?,0,0);"
+    command = "INSERT INTO users (username,password, win, total, picture)VALUES(?,?,0,0,0);"
     c.execute(command, (username, hashed_pass))
     db.commit()
     db.close()
@@ -15,7 +15,7 @@ def add_userFull(username, hashed_pass, question, hashed_ans, ):
     '''adds users to use table'''
     db = sqlite3.connect(DB)
     c = db.cursor()
-    command = "INSERT INTO users (username,password, question, answer, win, total)VALUES(?,?,?,?,0,0);"
+    command = "INSERT INTO users (username,password, question, answer, win, total, picture)VALUES(?,?,?,?,0,0,0);"
     c.execute(command, (username, hashed_pass, question, hashed_ans))
     db.commit()
     db.close()
@@ -91,6 +91,29 @@ def ranks():
         users[item[0]] = list
     db.close()
     return users
+
+def pic():
+    '''returns all the users and picture type in dict {user:pic}'''
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    command = "SELECT username,picture from users;"
+    c.execute(command)
+    info = c.fetchall()
+    users = {}
+    for item in info:
+        users[item[0]] = item[1]
+    db.close()
+    return users
+
+def pic(user):
+    '''returns picture type of a specific'''
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    command = "SELECT picture from users WHERE user=" + user + ";"
+    c.execute(command)
+    pic = c.fetchall()
+    db.close()
+    return pic
 
 
 def get_stat(user):

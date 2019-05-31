@@ -174,6 +174,17 @@ def how():
 def photo():
     return render_template("photo.html")
 
+# helper functions to change photos
+def picWhich(type):
+    if (type == 1):
+        return "./../static/images/profile.jpg"
+    elif (type == 2):
+        return "./../static/images/profile.jpg"
+    elif (type == 3):
+        return "./../static/images/profile.jpg"
+    else:
+        return "./../static/images/profile.jpg"
+
 
 def rankByPercent():
     fullStat = db.ranks()

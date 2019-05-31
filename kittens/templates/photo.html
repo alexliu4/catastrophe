@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}
+Starter Pokemon
+{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center" style="color:white"> Secret!! You can make your profile a gif!! </h1>
+<h1 class="text-center" style="color:black"> Choose your new Photo </h1>
+<br>
+
+<div class="container">
+  <form action="/start">
+    <div class="row">
+      <div class="col-sm">
+	<div class="alert alert-success text-center">
+	  <button type="submit" class="btn btn-outline-success btn-block btn-lg" name="starter" value="1">
+	    <img src="./../static/images/profile.jpg" class="image-rounded" alt="1" width="100%">
+	      <br>
+	      <h4>Option 1</h4>
+	  </button>
+	</div>
+      </div>
+      <div class="col-sm">
+	<div class="alert alert-danger text-center">
+	  <button type="submit" class="btn btn-outline-danger btn-block btn-lg" name="starter" value="2">
+	    <img src= "./../static/images/profile2.jpg" class="image-rounded" alt="2" width="100%">
+	      <br>
+	      <h4>Option 2</h4>
+	  </button>
+	</div>
+      </div>
+      <div class="col-sm">
+	<div class="alert alert-info text-center">
+	  <button type="submit" class="btn btn-outline-info btn-block btn-lg" name="starter" value="3">
+	    <img src="./../static/images/profile3.jpeg" class="image-rounded" alt="3" width="100%">
+	      <br>
+	      <h4>Option 3</h4>
+	  </button>
+	</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm">
+	<div class="alert alert-success text-center">
+	  <button type="submit" class="btn btn-outline-success btn-block btn-lg" name="starter" value="4">
+	    <img src="./../static/images/garfield.jpg" class="image-rounded" alt="4" width="100%">
+	      <br>
+	      <h4>Option 4</h4>
+	  </button>
+	</div>
+      </div>
+      <div class="col-sm">
+	<div class="alert alert-danger text-center">
+	  <button type="submit" class="btn btn-outline-danger btn-block btn-lg" name="starter" value="5">
+	    <img src= "./../static/images/jediocto.jpg" class="image-rounded" alt="5" width="100%">
+	      <br>
+	      <h4>Option 5</h4>
+	  </button>
+	</div>
+      </div>
+      <div class="col-sm">
+	<div class="alert alert-info text-center">
+	  <button type="submit" class="btn btn-outline-info btn-block btn-lg" name="starter" value="6">
+	    <img src="./../static/images/nerdocto.png" class="image-rounded" alt="6" width="100%">
+	      <br>
+	      <h4>Option 6</h4>
+	  </button>
+	</div>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}
