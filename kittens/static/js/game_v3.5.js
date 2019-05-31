@@ -171,6 +171,21 @@ var draw = function(e){
     arrange_cards(my_hand);
 };
 
+var opp_draw = function() {
+  var card = deck.pop()
+  console.log(card)
+  opponent_hand.push(card)
+  var type = card.getAttribute("type");
+  card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
+  //arrange_cards(opponent_hand);
+  var i;
+  for (i = 0; i < opponent_hand.length; i+=1){
+var card = opponent_hand[i];
+card.setAttribute("x", 100 + i*900/opponent_hand.length);
+card.setAttribute("y", 0);
+}
+}
+
 /*
 Rearrange the spacing of the cards every time one is added to the hand
 */
@@ -261,7 +276,7 @@ var gauge_val = 0;
 var OnStartTurn = function () {
   console.log("player turn")
   document.addEventListener('click', function(e){
-    
+
     if (1==0) {
       //draw
       console.log("hi");
@@ -273,7 +288,7 @@ var OnStartTurn = function () {
       console.log(move);
 
       if (move == 'shuffle') {shuffle(deck);}
-      else if (move == 'skip') {opponentTurn(); return;}
+      else if (move == 'skip') {opponentTurn(); console.log("back to player"); return; }
       else{}
 
     }
@@ -309,7 +324,7 @@ var opponentTurn = function() {
 
   if (gauge_val < 20) {
     console.log("gauge little")
-    //draw();
+    opp_draw();
     updateGauge(gauge_val + 5);
     console.log("gauge done")
     return;
@@ -325,8 +340,7 @@ var main = function() {
     var num_deck = deck.length;
 
     setup();
-    while (game_going) {
 	  OnStartTurn();
-  }
+
 }
 main();
