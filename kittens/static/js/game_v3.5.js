@@ -273,10 +273,22 @@ var endGame = function() {
 }
 
 var gauge_val = 0;
+var turn = 1;
 var OnStartTurn = function () {
+  var move;
   console.log("player turn")
-  document.addEventListener('click', function(e){
+  document.removeEventListener("click", function (e) {
+    e.stopPropagation();
+    console.log('stopped')
+  }, true);
 
+
+  document.removeEventListener("mouseover", function (e) {
+    e.stopPropagation();
+    console.log('stopped')
+  }, true);
+  document.addEventListener('click', function(e){
+    console.log("elisteners removed");
     if (1==0) {
       //draw
       console.log("hi");
@@ -288,7 +300,7 @@ var OnStartTurn = function () {
       console.log(move);
 
       if (move == 'shuffle') {shuffle(deck);}
-      else if (move == 'skip') {opponentTurn(); console.log("back to player"); return; }
+      else if (move == 'skip') {opponentTurn(); turn =2; return; }
       else{}
 
     }
@@ -327,20 +339,31 @@ var opponentTurn = function() {
     opp_draw();
     updateGauge(gauge_val + 5);
     console.log("gauge done")
-    return;
+
   }
   console.log("opponent has gone.");
+  turn = 1;
   return;
 }
 
-var main = function() {
+var init = function() {
     var game_going = true;
     var num_moves = 0;
     var turn = 1;
     var num_deck = deck.length;
 
     setup();
-	  OnStartTurn();
+
 
 }
-main();
+
+var main = function() {
+
+  OnStartTurn();
+
+
+
+  //requestAnimationFrame(main);
+}
+init();
+//requestAnimationFrame(main);

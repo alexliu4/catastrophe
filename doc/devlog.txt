@@ -178,6 +178,11 @@ AlexL -- 2019-05-28 12:54
   to hand (fixes/equalizes spacing between cards)
 ==============================================================
 
+MaggieZ -- 2019-05-28 18:13
+--------------------------------------------------------------
+- Tried to implement turns using a for loop (doesn't work!)
+==============================================================
+
 KarenL -- 2019-05-28 19:30
 --------------------------------------------------------------
 - Function to draw card
@@ -191,6 +196,15 @@ AlexL -- 2019-05-29 8:54
 MichelleT -- 2019-05-29 13:57
 --------------------------------------------------------------
 - Completed favor in the cards and animations
+==============================================================
+
+MaggieZ -- 2019-05-29 19:48
+--------------------------------------------------------------
+- Tried to implement turns using callbacks
+    doesn't work past the first switch to opponent
+- Added separate function for opponent draw
+    different y-value & no event mention
+    -** Need to flip drawn cards upside down
 ==============================================================
 
 KarenL -- 2019-05-30 19:30
@@ -214,4 +228,28 @@ AlexL -- 2019-05-31 12:54
 - Made db functions to store profile pictures
 - found 7 cute photos to use as a pfp
 - created photo.html to choose the picture
+==============================================================
+
+MaggieZ -- 2019-05-31 21:22
+--------------------------------------------------------------
+- Turns are a tricky business...
+==============================================================
+
+MaggieZ -- 2019-06-03 17:44
+--------------------------------------------------------------
+- Turns finally works! (callbacks did the trick)
+    there may be possible issues at the end of the game, but
+    I guess we'll find out when we get there
+    - Restructured a little bit to have a big player object
+      & to record player turns (possible multiplayer??)
+==============================================================
+
+MaggieZ -- 2019-06-04 01:51
+--------------------------------------------------------------
+- Integrating turns and functions from previous versions
+  (drawfrombottom, favor, skip, shuffle)
+  ** Need to do: attack
+- Added check for exploding kitten
+  ** Need to fix: successive user moves will return cards
+      that have already been played back to the user's hand 
 ==============================================================

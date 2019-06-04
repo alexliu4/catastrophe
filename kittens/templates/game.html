@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function(event)
     minVal:  0,
     maxVal:  100,
     minorTicks: 5,
-    needleVal : Math.round(30),
+    needleVal : Math.round(0),
     tickSpaceMinVal : 1,
     tickSpaceMajVal : 10,
     divID: "gaugeBox",
@@ -56,6 +56,6 @@ document.addEventListener("DOMContentLoaded", function(event)
 <br> <br>
 <script src="http://d3js.org/d3.v5.min.js"
 charset="utf-8"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/game_v4.js') }}" ></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/game_v5.js') }}" ></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/gauge3.js') }}" ></script>
 {% endblock %}
