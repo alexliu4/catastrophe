@@ -164,7 +164,8 @@ var opp_draw = function() {
 
 var drawfrombottom = function(){
   //e.stopPropagation();
-  var card = deck.splice(0);
+  var card = deck.splice(0, 1);
+  console.log(card)
   card.addEventListener("mouseover", hover);
   card.addEventListener("mouseleave", reset_position);
   card.removeEventListener("click", draw);
@@ -347,6 +348,13 @@ var nextTurn = function() {
 var check = function(){
   console.log("check")
   if (players[currentPlayer].Hand.some( card => card.getAttribute("type") === "explode")) {
+    if (players[currentPlayer].Hand.some( card => card.getAttribute("type") === "defuse")) {
+      //discard both cards
+      console.log("diffused you loser")
+    }
+    else {
+      endGame();
+    }
     console.log("explosion")
   }
 }
@@ -373,15 +381,16 @@ var onTurn = function() {
     document.addEventListener('click', blockClick, true);
     document.addEventListener('mouseover', blockMouseOver, true);
     if (gauge_val < 20) {
-      console.log("gauge little")
+      //console.log("gauge little")
       opp_draw();
-      console.log("gauge done")
+      //console.log("gauge done")
       nextTurn();
     }
   }
 
 }
 onTurn();
+
 var blockClick = function(e) {
   e.stopPropagation();
   console.log('stopped')
