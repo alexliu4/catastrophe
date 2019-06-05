@@ -2,7 +2,7 @@
 var c = document.getElementById("play_area");
 var favorButton = document.getElementById("favor")
 var shuffleButton = document.getElementById("shuffle")
-
+var drawfrombottomButton = document.getElementById("drawfrombottom")
 //tracks turns
 var turn_tracker = document.getElementById("turn_tracker")
 
@@ -256,21 +256,15 @@ var attack = function(target){
 }
 
 //var diffuse = function(target){}
-var drawfrombottom = function(target){
-  e.stopPropagation();
-  var card = deck.splice(0);
-  card.addEventListener("mouseover", hover);
-  card.addEventListener("mouseleave", reset_position);
-  card.removeEventListener("click", draw);
-  card.addEventListener("click", move_center);
-
-  //console.log(card.getAttribute("type"))
-  //card = e.target;
-  console.log(card.getAttribute("type"))
-  my_hand.push(card);
-  var type = card.getAttribute("type");
-  card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
-  arrange_cards(my_hand);
+var drawfrombottom = function(e){
+  // // e.stopPropagation();
+  // console.log("draw from bottom")
+  // console.log(deck)
+  console.log("drew from the bottom now we're here")
+  deck.push(deck[0]);
+  deck.shift();
+  draw(e);
+  // console.log(deck)
 }
 
 var favor = function(target){
@@ -299,12 +293,17 @@ favorButton.addEventListener('click', function(e){
 })
 
 shuffleButton.addEventListener('click', function(){
-  console.log("Shuffling!")
-  console.log(deck[0].getAttribute("type"))
+  // console.log("Shuffling!")
+  // console.log(deck[0].getAttribute("type"))
   shuffle(deck)
-
-  console.log(deck[0].getAttribute("type"))
+  // console.log(deck[0].getAttribute("type"))
 })
+
+drawfrombottomButton.addEventListener('click', function(e){
+  drawfrombottom(e)
+  // draw(e);
+})
+
 var main = function() {
   var game_going = true;
   var num_moves = 0;
