@@ -6,6 +6,8 @@ var drawfrombottomButton = document.getElementById("drawfrombottom")
 //tracks turns
 var turn_tracker = document.getElementById("turn_tracker")
 
+var game = document.getElementById("gameover")
+
 var deck = [];
 var my_hand = [];
 var opponent_hand = [];
@@ -304,6 +306,19 @@ drawfrombottomButton.addEventListener('click', function(e){
   // draw(e);
 })
 
+
+
+game.addEventListener('click', function(e){
+  console.log("hi")
+  var ctx = c.getContext("2d");
+  ctx.fillStyle = "#FF0000";
+  ctx.fillRect(20, 20, 150, 100);
+  // c.setAttribute("style", "background-color: red;");
+})
+
+var game = function(){
+  c.setAttribute("")
+}
 var main = function() {
   var game_going = true;
   var num_moves = 0;
