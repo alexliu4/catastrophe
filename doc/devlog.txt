@@ -251,5 +251,24 @@ MaggieZ -- 2019-06-04 01:51
   ** Need to do: attack
 - Added check for exploding kitten
   ** Need to fix: successive user moves will return cards
-      that have already been played back to the user's hand 
+      that have already been played back to the user's hand
+==============================================================
+
+AlexL -- 2019-06-03 2:43
+--------------------------------------------------------------
+- Updated README
+- Task the Tenth: PPMP
+Reviewed team Ca's project composed of Joshua Wiener, Kaitlin Wan,
+Britni Canale, and Max Millar. Everything seems to be in place and
+very organized for the most part. However, only the local host instructions
+were put into the readme. The readme seems to be missing a lot of information
+such as the packages used, apache launch instructions, and apis (or lack of).
+I opened two issues on their repo relating to the apache launch and missing
+packages info. Looking up the QAF thread it seems that ca$hmoney uses:
+      Passlib
+      Flask-SQLAlchemy
+      Flask-Migrate
+      Flask-Mail
+Other than missing apache launch instruction everything was successful with the
+launch for the local host.
 ==============================================================
