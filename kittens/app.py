@@ -172,16 +172,26 @@ def rankByPercent():
             percentage = (int((float(fullStat.get(person)[0]) / float(fullStat.get(person)[1])) * 100 ))
             fullStat[person] = percentage
     rank = (list(reversed(sorted(fullStat.items(), key = lambda kv:(kv[1], kv[0])))))
+    print("percent")
+    print (rank)
     return rank
+# rankByPercent()
 
 def rankByWins():
     fullStat = db.ranks()
+
+    for stat in fullStat:
+        fullStat[stat] = int(fullStat[stat][0])
+    print("fullStat")
+    print(fullStat)
     # for person in fullStat:
     #     if (int(fullStat.get(person)[1])):
     #         percentage = (int((float(fullStat.get(person)[0]) / float(fullStat.get(person)[1])) * 100 ))
     #         fullStat[person] = percentage
     rank = (list(reversed(sorted(fullStat.items(), key = lambda kv:(kv[1], kv[0])))))
     return rank
+
+print(rankByWins())
 
 def userRanksP(user):
     dict = rankByPercent()
