@@ -235,6 +235,11 @@ MaggieZ -- 2019-05-31 21:22
 - Turns are a tricky business...
 ==============================================================
 
+MichelleT -- 2019-06-01 4:18
+--------------------------------------------------------------
+- Finished draw from bottom
+==============================================================
+
 MaggieZ -- 2019-06-03 17:44
 --------------------------------------------------------------
 - Turns finally works! (callbacks did the trick)
@@ -271,6 +276,12 @@ packages info. Looking up the QAF thread it seems that ca$hmoney uses:
       Flask-Mail
 Other than missing apache launch instruction everything was successful with the
 launch for the local host.
+==============================================================
+
+MichelleT -- 2019-06-05 9:29
+--------------------------------------------------------------
+- Created a win/lose tracker when players complete a game so it updates stats
+- Fixed division by zero in leaderboard
 ==============================================================
 
 AlexL -- 2019-06-06 3:43

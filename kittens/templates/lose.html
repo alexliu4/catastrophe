@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+
+<div class ="jumbotron" align= "center">
+  Stats are updated! See the <a href="/leader"> leaderboard! </a>
+
+</div>
+<div class="container-fluid" align="center">
+
+  <a href="/game"> <img style="width: 600px; height: 100px;" src="https://pngimage.net/wp-content/uploads/2018/06/play-again-png-6.png">
+</a>
+</div>
+ <!-- <script src="../static/js/deck.js"></script> -->
+{% endblock %}

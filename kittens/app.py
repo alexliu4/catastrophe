@@ -14,6 +14,16 @@ def home():
         return redirect(url_for('login'))
     return render_template("login.html")
 
+@app.route("/win")
+def win():
+    db.add_stat( session['user'], 1 )
+    return render_template("win.html")
+
+@app.route("/lose")
+def lose():
+    db.add_stat( session['user'], 0 )
+    return render_template("lose.html")
+
 @app.route('/login')
 def login():
     if 'user' in session:
