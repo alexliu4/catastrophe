@@ -134,6 +134,10 @@ var draw = function(e){
   players[currentPlayer].Hand.push(card);
   var type = card.getAttribute("type");
   card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
+  card.addEventListener("mouseover", hover);
+  card.addEventListener("mouseleave", reset_position);
+  card.removeEventListener("click", draw);
+  card.addEventListener("click", move_center);
 
   check();
   gauge_val += 5;
@@ -147,11 +151,16 @@ var opp_draw = function() {
   players[currentPlayer].Hand.push(card)
   var type = card.getAttribute("type");
   card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
+
   //arrange_cards(opponent_hand);
 
 
   var y;
   if (currentPlayer == 0) {
+    card.addEventListener("mouseover", hover);
+    card.addEventListener("mouseleave", reset_position);
+    card.removeEventListener("click", draw);
+    card.addEventListener("click", move_center);
     y = 400
   }
   if (currentPlayer == 1) {
@@ -252,13 +261,44 @@ var move_center = function(e){
 
 }
 
+var opp_move_center = function(card) {
+  var requestID = 0;
+  var type = card.getAttribute("type");
+  var place = function(){
+    c.removeChild(card);
+    var prev_y = Number(card.getAttribute("y"));
+    var prev_x = Number(card.getAttribute("x"));
+
+    var x_inc = (500 - prev_x)/10;
+    var y_inc = (200 - prev_y)/10;
+
+    card.setAttribute("y", prev_y + y_inc);
+    card.setAttribute("x", prev_x + x_inc);
+    c.appendChild(card);
+    //cancel before animating in case  clicked multiple times
+    window.cancelAnimationFrame(requestID)
+    requestID = window.requestAnimationFrame(place);
+    if (prev_y > 401 ){
+      window.cancelAnimationFrame(requestID);
+    };
+  }
+  place();
+  card.removeEventListener("mouseover", hover);
+  card.removeEventListener("mouseleave", reset_position);
+  card.removeEventListener("click", move_center);
+  remove_card(players[currentPlayer].Hand, type);
+
+}
+
 //==============================================================================
 var currentPlayer = 0;
 var players = new Array();
 var gauge_val = 0;
 
 var attack = function() {
-  currentPlayer = 1;
+  console.log("snackattack")
+  currentPlayer += 1;
+  currentPlayer = currentPlayer % 2;
   opp_draw();
   opp_draw();
   nextTurn();
@@ -350,12 +390,15 @@ var nextTurn = function() {
 var check = function(){
   console.log("check")
   if (players[currentPlayer].Hand.some( card => card.getAttribute("type") === "explode")) {
-    if (players[currentPlayer].Hand.some( card => card.getAttribute("type") === "defuse")) {
+    if (players[currentPlayer].Hand.some( card => card.getAttribute("type") === "diffuse")) {
       //discard both cards
       console.log("diffused you loser")
-      remove_card(players[currentPlayer].Hand, "diffuse");
-      remove_card(players[currentPlayer].Hand, "explode");
-
+      //remove_card(players[currentPlayer].Hand, "diffuse");
+      //remove_card(players[currentPlayer].Hand, "explode");
+      let list = players[currentPlayer].Hand.filter(card => card.getAttribute("type") == "diffuse")
+      let list1 = players[currentPlayer].Hand.filter(card => card.getAttribute("type") == "explode")
+      opp_move_center(list[0])
+      opp_move_center(list1[0])
 
     }
     else {
@@ -381,6 +424,7 @@ var onTurn = function() {
       else if (move == 'favor') {favor()}
       else if (move == 'attack') {attack()}
 
+      arrange_cards(players[currentPlayer].Hand, 400)
 
     })}
 
@@ -389,15 +433,19 @@ var onTurn = function() {
       document.addEventListener('mouseover', blockMouseOver, true);
       if (players[currentPlayer].Hand.length == 1 ) {
         opp_draw();
+        nextTurn();
       }
-      else if (players[currentPlayer].Hand.some( card => card.getAttribute("type") == "diffuse")) {
+      //else if (players[currentPlayer].Hand.some( card => card.getAttribute("type") == "diffuse")) {
+      else if (gauge_val < 20) {
         //console.log("gauge little")
+        selectRandom(players[currentPlayer].Hand);
         opp_draw();
         //console.log("gauge done")
         nextTurn();
       }
       else  {
         // play random cards
+        oppMove();
       }
     }
 
@@ -415,7 +463,48 @@ var onTurn = function() {
 
   }
 
+  var selectRandom = function(array) {
 
+    let list = array.filter(card => card.getAttribute("type") != "diffuse");
+    console.log(list);
+
+    var rand = list[Math.floor(Math.random() * list.length)];
+    console.log(rand)
+    //var rand_card = list.find(card => car)
+    return rand;
+  }
+
+  var oppMove = function() {
+    var card = selectRandom(players[currentPlayer].Hand);
+    var move = card.getAttribute("type");
+    console.log("opponent move is " + move)
+    opp_move_center(card);
+    console.log("i like to move it move it");
+    var chance = Math.random();
+    if (move == 'shuffle') {
+      shuffle(deck);
+      if (chance < 0.2) {
+        oppMove();
+      }
+      else { nextTurn();}
+    }
+    else if (move == 'skip') {nextTurn(); }
+    else if (move == 'drawfrombottom'){drawfrombottom();}
+    else if (move == 'favor') {
+      favor();
+      if (chance < 0.2) {
+        oppMove();
+      }
+      else { nextTurn();}}
+    else if (move == 'attack') {
+      attack();
+      if (chance < 0.2) {
+        oppMove();
+      }
+      else { nextTurn();}}
+      //arrange_cards(players[1].Hand, 0)
+
+  }
   /*
 
   */
