@@ -1,12 +1,16 @@
 //get canvas
 var c = document.getElementById("play_area");
+// var ctx = c.getContext("2d");
+
 var favorButton = document.getElementById("favor")
 var shuffleButton = document.getElementById("shuffle")
 var drawfrombottomButton = document.getElementById("drawfrombottom")
+
 //tracks turns
 var turn_tracker = document.getElementById("turn_tracker")
 
 var game = document.getElementById("gameover")
+var gameover = document.getElementById("gameover2")
 
 var deck = [];
 var my_hand = [];
@@ -309,11 +313,10 @@ drawfrombottomButton.addEventListener('click', function(e){
 
 
 game.addEventListener('click', function(e){
+  turn_tracker.innerHTML = "Game Over!  <a href = 'leader'>  Update your stats! </a> ";
+
+  c.style.backgroundColor = "#000000"
   console.log("hi")
-  var ctx = c.getContext("2d");
-  ctx.fillStyle = "#FF0000";
-  ctx.fillRect(20, 20, 150, 100);
-  // c.setAttribute("style", "background-color: red;");
 })
 
 var game = function(){

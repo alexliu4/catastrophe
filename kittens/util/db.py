@@ -63,16 +63,20 @@ def get_all_users():
     db.close()
     return users
 
-def add_stat(user, win):
+def add_stat(user, score):
+
+    print("heyyyyyyyyy!")
+    print(user)
     '''adds stat to users account'''
     db = sqlite3.connect(DB)
     c = db.cursor()
     command = "SELECT win,total from users WHERE username ='" + user + "';"
     c.execute(command)
     games = c.fetchall()
-    win = games[0] + 1
-    total = games[1] + 1
-    command = "UPDATE users SET win =" + win + ", total =" + total + "WHERE username ='" + user + "';"
+    win = str(games[0][0] + score)
+    total = str(games[0][1] + 1)
+    command = "UPDATE users SET win =" + win + ", total =" + total + " WHERE username ='" + user + "';"
+    print(command)
     c.execute(command)
     # print("stats updated")
     db.commit()
