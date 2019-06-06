@@ -60,21 +60,30 @@ button {
       {% endif %}
 
      </h1>
-    <button>Check Leaderboard</button>
+     <form method="get" action="/leader">
+       <button type="submit">Check Leaderboard</button>
+     </form>
+    <!-- <button>Check Leaderboard</button> -->
   </div>
   <br> <br> <br> <br> <br>
   <p style="margin-left: 850px;">
 
     <img src="./../static/images/profile.jpg" alt="Profile" height="1" width="1" id = "cat" style= "cursor: pointer;">
   </p>
+
   <p style="margin-left: 50px;">
-    <img src="./../static/images/profile.jpg" alt="Profile" float="left" height="300" width="300">
+    <img src={{ photo }} alt="Profile" float="left" height="300" width="300">
   </p>
 </div>
 
 <div class="jumbotron">
-    <br> <br> <br>
-    <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button> Edit Picture </button> </p>
+
+    <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <form method="get" action="/photo">
+        <button type="submit">Edit Picture</button>
+      </form>
+       <!-- <button> Edit Picture </button>  -->
+     </p>
 
     <h2> Rank By Percentage: {{ rankP }}th Place <i class="fas fa-award"></i></h2>
     <h2> Rank By Wins: {{ rankW }}th Place <i class="fas fa-award"></i></h2>

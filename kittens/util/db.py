@@ -92,6 +92,19 @@ def ranks():
     db.close()
     return users
 
+
+def get_stat(user):
+    '''returns the user and stats in a list'''
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    command = "SELECT win,total from users " + "WHERE username ='" + user + "';"
+    c.execute(command)
+    info = c.fetchall()
+    for item in info:
+        user = [ str(item[0]), str(item[1])]
+    db.close()
+    return user
+
 def pic():
     '''returns all the users and picture type in dict {user:pic}'''
     db = sqlite3.connect(DB)
@@ -109,30 +122,26 @@ def pic(user):
     '''returns picture type of a specific'''
     db = sqlite3.connect(DB)
     c = db.cursor()
-    command = "SELECT picture from users WHERE user=" + user + ";"
+    command = "SELECT picture from users WHERE username='" + user + "';"
     c.execute(command)
     pic = c.fetchall()
     db.close()
-    return pic
+    return pic[0][0]
 
-
-def get_stat(user):
-    '''returns the user and stats in a list'''
+def update_pic(user, pic):
+    '''resets users pic'''
     db = sqlite3.connect(DB)
     c = db.cursor()
-    command = "SELECT win,total from users " + "WHERE username ='" + user + "';"
+    command = "UPDATE users SET picture ='" + pic + "' WHERE username ='" + user + "';"
     c.execute(command)
-    info = c.fetchall()
-    for item in info:
-        user = [ str(item[0]), str(item[1])]
+    db.commit()
     db.close()
-    return user
 
 # MAKE TABLES AND DATABASE IF THEY DONT EXIST
 db = sqlite3.connect(DB)
 c = db.cursor()
 commands = []
-commands += ["CREATE TABLE IF NOT EXISTS users(username TEXT, password TEXT, question TEXT, answer TEXT, win INT, total INT)"]
+commands += ["CREATE TABLE IF NOT EXISTS users(username TEXT, password TEXT, question TEXT, answer TEXT, win INT, total INT, picture INT)"]
 # commands += ["CREATE TABLE IF NOT EXISTS pages(link TEXT, weather TEXT, comic TEXT)"]
 for command in commands:
     c.execute(command)
