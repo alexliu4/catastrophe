@@ -254,7 +254,7 @@ MaggieZ -- 2019-06-04 01:51
       that have already been played back to the user's hand
 ==============================================================
 
-AlexL -- 2019-06-03 2:43
+AlexL -- 2019-06-06 2:43
 --------------------------------------------------------------
 - Updated README
 - Task the Tenth: PPMP
@@ -271,4 +271,12 @@ packages info. Looking up the QAF thread it seems that ca$hmoney uses:
       Flask-Mail
 Other than missing apache launch instruction everything was successful with the
 launch for the local host.
+==============================================================
+
+AlexL -- 2019-06-06 3:43
+--------------------------------------------------------------
+- Fixed error with registration leading back to login pages
+- Fixed errors with db functions (updating picture, finding picture data)
+- Finished with editting profile pictures
+- Fixed error with account page when new users have 0 games
 ==============================================================
