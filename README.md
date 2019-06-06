@@ -1,5 +1,6 @@
 # catastrophe
 ## Roster: Alex Liu(project manager), Karen Li, Michelle Tang, Maggie Zhao
+Roles can be found at this [section](../master/README.md/#roles)
 
 ---
 
@@ -114,6 +115,16 @@ git clone https://github.com/alexliu4/catastrophe.git
 This will make a HTTPS clone of the repo. Another option is to download the ZIP folder after clicking `Clone or download` on GitHub, then extracting it to your desired location.
 _This project requires the dependencies listed on the [Dependencies](../master/README.md/#dependencies) section in order to run. Please have them downloaded before continuing._
 
+You can activate your virtual environment and download the dependencies
+```
+python3 -m venv venv
+. venv/bin/activate
+
+cd path/to/project/dir/catastrophe/kittens
+pip install -r requirements.txt
+
+```
+
 Now your program is ready to go! On your terminal, run the following commands:
 
 ```bash
@@ -132,10 +143,13 @@ This should cause the following to appear:
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
 
-Now go to your favorite browser and paste this into the URL:
+#### Final Steps
 
-```bash
-http://127.0.0.1:500/
+```
+Open a web browser and navigate to the link http://127.0.0.1:5000/.
+
+Then register if you are a new user or login if you are an existing user to play our game and have us save your stats.
+Most importantly have fun on our site!
 ```
 
 This will take you to the `localhost` where your can the project working in all of its glory!
@@ -172,17 +186,6 @@ pip install -r < requirements.txt
 This will change the current working directory to the cloned repo directory, then recursively install all the dependencies listed in the [requirements.txt](../master/requirements.txt) file located in the root of the repo directory. _Note: This assumes that you do not have a virtual environment to work in. If you do, please do activate it or create a new environment in order to keep your current versions._
 
 More information about the packages are available on the bottom of the page along with instructions to download them individually.
-
----
-
-### Final Steps
-
-```
-Open a web browser and navigate to the link http://127.0.0.1:5000/.
-
-Then register if you are a new user or login if you are an existing user to play our game and have us save your stats.
-Most importantly have fun on our site!
-```
 
 ---
 
@@ -269,3 +272,22 @@ pip install jinja2
 ```bash
 pip install passlib
 ```
+
+## API
+
+No API's were used for this project so it is unnecessary to procure keys.
+
+## Roles
+
+Alex Liu
+- Project manager aka ‘big boss’
+- Database
+Karen Li
+- Animation
+- Game mechanics
+Michelle Tang
+- Game mechanics
+- CSS
+Maggie Zhao
+- Program the opponent
+- D3 (gauge)
