@@ -156,15 +156,19 @@ var draw = function(e){
 	if (prev_y > 380 ){
 	    window.cancelAnimationFrame(requestID);
 	    arrange_cards(players[currentPlayer].Hand, 400)
+	    nextTurn();
 	};
 
     }
     move_card();
-   // 
-    //window.setTimeout(arrange_cards(players[currentPlayer].Hand, 400), 2000);
-    nextTurn();
+ 
+    //setTimeout(arrange_cards, 2000, players[currentPlayer].Hand, 400);
+    //nextTurn();
+    
 };
 var opp_draw = function() {
+    //console.log("opponent draw????");
+    var requestID;
     var card = deck.pop()
     console.log(card)
     players[currentPlayer].Hand.push(card)
@@ -175,7 +179,32 @@ var opp_draw = function() {
     check();
     gauge_val += 5;
     updateGauge(gauge_val)
-    arrange_cards(players[currentPlayer].Hand, 0);
+
+    var get_card = function(){
+	c.removeChild(card);
+	var prev_y = Number(card.getAttribute("y"));
+	var prev_x = Number(card.getAttribute("x"));
+
+	var x_inc = (1000 - prev_x)/50;
+	var y_inc = (0 - prev_y)/50;
+	//console.log("x inc:" +x_inc.toString() + "; y_inc: " + y_inc.toString());
+
+	card.setAttribute("y", prev_y + y_inc);
+	card.setAttribute("x", prev_x + x_inc);
+	c.appendChild(card);
+	//cancel before animating in case  clicked multiple times
+	window.cancelAnimationFrame(requestID)
+	requestID = window.requestAnimationFrame(get_card);
+	if (prev_y < 5 ){
+	    window.cancelAnimationFrame(requestID);
+	    arrange_cards(players[currentPlayer].Hand, 0)
+	    //nextTurn();
+	};
+
+    }
+    get_card();
+    
+   // arrange_cards(players[currentPlayer].Hand, 0);
 
 }
 
