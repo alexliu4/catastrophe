@@ -282,12 +282,15 @@ No API's were used for this project so it is unnecessary to procure keys.
 Alex Liu
 - Project manager aka ‘big boss’
 - Database
+
 Karen Li
 - Animation
 - Game mechanics
+
 Michelle Tang
 - Game mechanics
 - CSS
+
 Maggie Zhao
 - Program the opponent
 - D3 (gauge)
