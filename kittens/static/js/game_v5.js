@@ -1,7 +1,6 @@
 //get canvas
 var c = document.getElementById("play_area");
-var favorButton = document.getElementById("favor")
-var shuffleButton = document.getElementById("shuffle")
+
 
 //tracks turns
 var turn_tracker = document.getElementById("turn_tracker")
@@ -58,13 +57,13 @@ var shuffle = function(array){
 var make_deck = function(){
   var types = [
     "attack",
-    "drawfrombottom",
-    "favor",
+    // "drawfrombottom",
+    // "favor",
     "shuffle",
     "skip",
     "reverse",
   ]
-  for (i = 0; i < 6; i+=1){
+  for (i = 0; i < 4; i+=1){
     var type = types[i];
     for (j = 0; j < 4; j+=1){
       card = make_card(type);
@@ -340,33 +339,33 @@ var opp_move_center = function(card) {
 }
 
 var return_to_deck = function (card){
-    var requestID;
-    card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", "../static/images/backcard.png");
-    var move_card = function(){
-	c.removeChild(card);
-	var prev_y = Number(card.getAttribute("y"));
-	var prev_x = Number(card.getAttribute("x"));
+  var requestID;
+  card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", "../static/images/backcard.png");
+  var move_card = function(){
+    c.removeChild(card);
+    var prev_y = Number(card.getAttribute("y"));
+    var prev_x = Number(card.getAttribute("x"));
 
-	var x_inc = (0 - prev_x)/50;
-	var y_inc = (200 - prev_y)/50;
+    var x_inc = (0 - prev_x)/50;
+    var y_inc = (200 - prev_y)/50;
 
-	card.setAttribute("y", prev_y + y_inc);
-	card.setAttribute("x", prev_x + x_inc);
-	c.appendChild(card);
+    card.setAttribute("y", prev_y + y_inc);
+    card.setAttribute("x", prev_x + x_inc);
+    c.appendChild(card);
 
-	//cancel before animating in case  clicked multiple times
-	window.cancelAnimationFrame(requestID)
-	requestID = window.requestAnimationFrame(move_card);
-	if (prev_x < 20 ){
-	    window.cancelAnimationFrame(requestID);
+    //cancel before animating in case  clicked multiple times
+    window.cancelAnimationFrame(requestID)
+    requestID = window.requestAnimationFrame(move_card);
+    if (prev_x < 20 ){
+      window.cancelAnimationFrame(requestID);
 
-	    card.setAttribute("y", 200);
-	    card.setAttribute("x", 0);
-	    card.addEventListener("click", draw);
-	};
+      card.setAttribute("y", 200);
+      card.setAttribute("x", 0);
+      card.addEventListener("click", draw);
+    };
 
-    }
-    move_card();
+  }
+  move_card();
 
 }
 
@@ -416,9 +415,9 @@ var favor = function(){
   console.log(opp_hand)
   console.log(my_hand)
 }
-favorButton.addEventListener('click', function(e){
-  favor(e)
-})
+// favorButton.addEventListener('click', function(e){
+//   favor(e)
+// })
 function createPlayers(num) {
   players = new Array();
   for (var i = 1; i <= num; i++){
@@ -525,7 +524,7 @@ var onTurn = function() {
     //console.log("removed")
     var move;
     c.addEventListener('click', playerTurn, false)
-      //console.log("elisteners removed");;
+    //console.log("elisteners removed");;
 
 
     arrange_cards(players[currentPlayer].Hand, 400);
@@ -621,7 +620,6 @@ var oppMove = function() {
 }
 
 var endGame = function() {
-
   console.log("you dead dweeb")
   if (loser == 0){
     turn_tracker.innerHTML = "Game Over!  <a href = 'lose'>  Update your stats! </a> ";
@@ -630,7 +628,7 @@ var endGame = function() {
     turn_tracker.innerHTML = "Game Over!  <a href = 'win'>  Update your stats! </a> ";
   }
 
-  c.style.backgroundColor = "#000000"
+  // c.style.background/-image = 'url("./images/wood.png")';
   console.log("hi")
 }
 

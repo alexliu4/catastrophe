@@ -3,7 +3,7 @@ var c = document.getElementById("play_area");
 
 //tracks turns
 var turn_tracker = document.getElementById("turn_tracker")
-
+// turn_tracker.innerHTML="HII".
 var deck = [];
 var deck_length = 0
 var loser;
@@ -56,13 +56,13 @@ var shuffle = function(array){
 var make_deck = function(){
   var types = [
     "attack",
-    "drawfrombottom",
-    "favor",
+    // "drawfrombottom",
+    // "favor",
     "shuffle",
     "skip",
     "reverse",
   ]
-  for (i = 0; i < 6; i+=1){
+  for (i = 0; i < 4; i+=1){
     var type = types[i];
     for (j = 0; j < 4; j+=1){
       card = make_card(type);
@@ -407,8 +407,8 @@ var attack = function() {
     arrange_cards(players[1].Hand, 0)
   }
   else {
-    drawfrombottom();
-    drawfrombottom();
+    // drawfrombottom();
+    // drawfrombottom();
     arrange_cards(players[0].Hand, 400)
   }
 
@@ -505,6 +505,7 @@ var nextTurn = function() {
   onTurn();
 }
 var playerTurn = function(e) {
+  // turn_tracker.innerHTML = "YOUR TURN";
   move = e.target.getAttribute("type")
   console.log("player turn")
   if (move == 'shuffle') {shuffle(deck);}
@@ -551,7 +552,11 @@ var check = function(){
 }
 var onTurn = function() {
   console.log("current player " + currentPlayer)
+  // turn_tracker.innerHTML = "YOUR TURN";
+
+
   if (currentPlayer == 0){
+
     console.log("start of turn")
     //console.log("tryna remove elisteners yafeel")
     document.removeEventListener('click', blockClick, true);
@@ -564,11 +569,13 @@ var onTurn = function() {
 
     arrange_cards(players[currentPlayer].Hand, 400);
     console.log("player went")
+    // turn_tracker.innerHTML = "OPPONENT'S TURN";
 
 
   }
 
   if (currentPlayer == 1) {
+
     c.removeEventListener('click', playerTurn)
     document.addEventListener('click', blockClick, true);
     document.addEventListener('mouseover', blockMouseOver, true);
@@ -620,6 +627,8 @@ var selectRandom = function(array) {
 }
 
 var oppMove = function() {
+  // turn_tracker.innerHTML = "OPPONENT'S TURN";
+  console.log("???")
   var card = selectRandom(players[currentPlayer].Hand);
   var move = card.getAttribute("type");
   console.log("opponent move is " + move)
@@ -663,7 +672,6 @@ var endGame = function() {
   else{
     turn_tracker.innerHTML = "Game Over!  <a href = 'win'>  Update your stats! </a> ";
   }
-
   c.style.backgroundColor = "#000000"
   console.log("hi")
 }
