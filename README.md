@@ -58,6 +58,8 @@ $ sudo mv kittens /var/www
 $ sudo cd /var/www
 ```
 
+Open the conf file and change the server name to your ip address: nano donut_time.conf
+
 * Put `.conf` file in web serving config folder
 ```
 $ sudo mv /var/www/kittens/kittens.conf /etc/apache2/sites-available
