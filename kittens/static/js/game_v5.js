@@ -559,7 +559,7 @@ var oppMove = function() {
     if (chance < 0.2) {
       oppMove();
     }
-    else { nextTurn();}
+    else { opp_draw(); nextTurn();}
   }
   else if (move == 'skip') {nextTurn(); }
   else if (move == 'reverse') {nextTurn(); }
@@ -569,7 +569,7 @@ var oppMove = function() {
     if (chance < 0.2) {
       oppMove();
     }
-    else { nextTurn();}
+    else { opp_draw(); nextTurn();}
   }
   else if (move == 'attack') {
     attack();
