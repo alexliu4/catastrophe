@@ -35,17 +35,6 @@ sudo apt update
 sudo apt upgrade
 ```
 
-```
-#!/usr/bin/python
-import sys
-sys.path.insert(0,"/var/www/<appname>/")
-
-from <appname> import app as application
-```
-- Change app to match name of flask object in **\_\_init_\_.py**
-
-* Change the directory to the root directory of your new account: ```$ cd```
-
 * Clone this repository into your root directory
 ```
 $ git clone https://github.com/alexliu4/catastrophe.git
@@ -53,7 +42,7 @@ $ git clone https://github.com/alexliu4/catastrophe.git
 
 * Installing pip3 dependencies
 ```
-$ sudo -H pip3 install -r kittens/kittens/requirements.txt
+$ sudo pip3 install -r kittens/kittens/requirements.txt
 ```
 
 * Add `www-data` write permissions to folder
@@ -68,6 +57,8 @@ $ sudo chmod -R g+w kittens
 $ sudo mv kittens /var/www
 $ sudo cd /var/www
 ```
+
+Open the conf file and change the server name to your ip address: nano donut_time.conf
 
 * Put `.conf` file in web serving config folder
 ```
