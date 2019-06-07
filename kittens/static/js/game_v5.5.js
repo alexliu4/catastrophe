@@ -173,9 +173,7 @@ var opp_draw = function() {
     console.log(card)
     players[currentPlayer].Hand.push(card)
     var type = card.getAttribute("type");
-    card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
-    //arrange_cards(opponent_hand);
-
+  
     check();
     gauge_val += 5;
     updateGauge(gauge_val)
@@ -197,7 +195,8 @@ var opp_draw = function() {
 	requestID = window.requestAnimationFrame(get_card);
 	if (prev_y < 5 ){
 	    window.cancelAnimationFrame(requestID);
-	    arrange_cards(players[currentPlayer].Hand, 0)
+	    console.log("current player is" + currentPlayer.toString());
+	    arrange_cards(players[1].Hand, 0)
 	    //nextTurn();
 	};
 
