@@ -200,23 +200,19 @@ def rankByWins():
 
     for stat in fullStat:
         fullStat[stat] = int(fullStat[stat][0])
-    print("fullStat")
-    print(fullStat)
-    # for person in fullStat:
-    #     if (int(fullStat.get(person)[1])):
-    #         percentage = (int((float(fullStat.get(person)[0]) / float(fullStat.get(person)[1])) * 100 ))
-    #         fullStat[person] = percentage
+    # print("fullStat")
+    # print(fullStat)
+
     rank = (list(reversed(sorted(fullStat.items(), key = lambda kv:(kv[1], kv[0])))))
     return rank
 
-# print(rankByWins())
 
 def userRanksP(user):
     dict = rankByPercent()
     num = 1
     for entry in dict:
         if user == entry[0]:
-            print ("found user" )
+            # print ("found user" )
             return (num)
         num += 1
     return "none found"
@@ -230,8 +226,6 @@ def userRanksW(user):
         num += 1
     return "none found"
 
-
-# [('michelle', 50), ('michelle2', 33), ('michelle3', 20), ('maggie', 20), ('alex', 4)]
 
 @app.route('/logout', methods = ['GET'])
 def logout():

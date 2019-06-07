@@ -29,7 +29,7 @@ function Gauge(opt) {
     if(typeof opt.maxTickAngle === 'undefined')     {opt.maxTickAngle=300}
     if(typeof opt.zeroNeedleAngle === 'undefined')  {opt.zeroNeedleAngle=40}
     if(typeof opt.maxNeedleAngle === 'undefined')   {opt.maxNeedleAngle=320}
-    
+
     if(typeof opt.tickColMaj === 'undefined')       {opt.tickColMaj = '#0099CC'}
     if(typeof opt.tickColMin === 'undefined')       {opt.tickColMin = '#000'}
     if(typeof opt.outerEdgeCol === 'undefined')     {opt.outerEdgeCol = '#FEFEFC'}
@@ -164,7 +164,7 @@ function Gauge(opt) {
     d3.selectAll("[id=circles]")
             .on("click", function(e){
               //console.log(e)
-              updateGauge(Math.random() * 100)
+              // updateGauge(Math.random() * 100)
             })
     for (var index in opt.grayZones)
     {
