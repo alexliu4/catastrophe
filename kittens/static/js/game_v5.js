@@ -14,6 +14,7 @@ var card_images = {
   "drawfrombottom": "../static/images/drawfrombottom.png",
   "favor": "../static/images/favor.png",
   "shuffle": "../static/images/shuffle.png",
+  "reverse": "../static/images/reverse.png",
   "skip": "../static/images/skip.png",
   "diffuse": "../static/images/diffuse.png",
   "explode": "../static/images/explodingkitten.png"
@@ -60,9 +61,10 @@ var make_deck = function(){
     "drawfrombottom",
     "favor",
     "shuffle",
-    "skip"
+    "skip",
+    "reverse",
   ]
-  for (i = 0; i < 5; i+=1){
+  for (i = 0; i < 6; i+=1){
     var type = types[i];
     for (j = 0; j < 4; j+=1){
       card = make_card(type);
@@ -436,6 +438,8 @@ var playerTurn = function(e) {
   console.log("player turn")
   if (move == 'shuffle') {shuffle(deck);}
   else if (move == 'skip') {nextTurn(); }
+  else if (move == 'reverse') {nextTurn(); }
+
   else if (move == 'drawfrombottom'){drawfrombottom();}
   else if (move == 'favor') {favor(); }
   else if (move == 'attack') {attack(); }
@@ -558,6 +562,7 @@ var oppMove = function() {
     else { nextTurn();}
   }
   else if (move == 'skip') {nextTurn(); }
+  else if (move == 'reverse') {nextTurn(); }
   else if (move == 'drawfrombottom'){drawfrombottom();}
   else if (move == 'favor') {
     favor();
