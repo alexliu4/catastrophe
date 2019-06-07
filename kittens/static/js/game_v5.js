@@ -302,6 +302,7 @@ var move_center = function(e){
 var opp_move_center = function(card) {
     var requestID = 0;
     var type = card.getAttribute("type");
+    card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
     var place = function(){
 	c.removeChild(card);
 	var prev_y = Number(card.getAttribute("y"));
