@@ -200,7 +200,7 @@ var opp_draw = function() {
 	//cancel before animating in case  clicked multiple times
 	window.cancelAnimationFrame(requestID)
 	requestID = window.requestAnimationFrame(get_card);
-	if (prev_y < 5 ){
+	if (prev_y < 30 ){
 	    window.cancelAnimationFrame(requestID);
 	    console.log("current player is" + currentPlayer.toString());
 	    arrange_cards(players[1].Hand, 0)
