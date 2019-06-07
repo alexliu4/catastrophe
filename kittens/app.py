@@ -14,6 +14,16 @@ def home():
         return redirect(url_for('login'))
     return render_template("login.html")
 
+@app.route("/win")
+def win():
+    db.add_stat( session['user'], 1 )
+    return render_template("win.html")
+
+@app.route("/lose")
+def lose():
+    db.add_stat( session['user'], 0 )
+    return render_template("lose.html")
+
 @app.route('/login')
 def login():
     if 'user' in session:
@@ -167,21 +177,39 @@ def place():
 
 def rankByPercent():
     fullStat = db.ranks()
+    # print("fullStat:")
+    # print(fullStat)
     for person in fullStat:
+        # print(person)
         if (int(fullStat.get(person)[1])):
             percentage = (int((float(fullStat.get(person)[0]) / float(fullStat.get(person)[1])) * 100 ))
             fullStat[person] = percentage
+        else:
+            fullStat[person] = 0
+    # print("----")
+    # print (fullStat)
     rank = (list(reversed(sorted(fullStat.items(), key = lambda kv:(kv[1], kv[0])))))
+    # print("percent")
+    # print (rank)
     return rank
+
+# print(rankByPercent())
 
 def rankByWins():
     fullStat = db.ranks()
+
+    for stat in fullStat:
+        fullStat[stat] = int(fullStat[stat][0])
+    print("fullStat")
+    print(fullStat)
     # for person in fullStat:
     #     if (int(fullStat.get(person)[1])):
     #         percentage = (int((float(fullStat.get(person)[0]) / float(fullStat.get(person)[1])) * 100 ))
     #         fullStat[person] = percentage
     rank = (list(reversed(sorted(fullStat.items(), key = lambda kv:(kv[1], kv[0])))))
     return rank
+
+# print(rankByWins())
 
 def userRanksP(user):
     dict = rankByPercent()
