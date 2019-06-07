@@ -626,6 +626,21 @@ var endGame = function() {
   c.style.backgroundColor = "#000000"
   console.log("hi")
 }
+
+
+/*
+var card = document.createElementNS("http://www.w3.org/2000/svg", "image");
+card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", "../static/images/attack.png");
+card.setAttribute("width",180);
+card.setAttribute("height",180);
+card.setAttribute("x", 600);
+card.setAttribute("y", 500);
+card.setAttribute("type", "attack")
+c.appendChild(card);
+
+return_to_deck(card);
+*/
+
 init();
 onTurn();
 /*
