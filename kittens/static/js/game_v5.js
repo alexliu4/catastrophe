@@ -510,11 +510,11 @@ var onTurn = function() {
       nextTurn();
     }
     else  {
-      opp_draw();
+      //opp_draw();
       //console.log("gauge done")
-      nextTurn();
+      //nextTurn();
       // play random cards
-      //oppMove();
+      oppMove();
     }
   }
 
