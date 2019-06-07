@@ -260,7 +260,7 @@ def picWhich(type):
     elif (type == 1):
         return "./../static/images/profile2.jpg"
     elif (type == 2):
-        return "./../static/images/profile3.jpeg"
+        return "./../static/images/profile3.jpg"
     elif (type == 3):
         return "./../static/images/garfield.jpg"
     elif (type == 4):
