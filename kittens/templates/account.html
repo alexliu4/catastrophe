@@ -49,6 +49,10 @@ img {
 button {
   cursor: zoom-in;
 }
+
+h2 {
+    text-align:center;
+}
 </style>
 
 <div class="hero-image">
@@ -77,20 +81,20 @@ button {
 </div>
 
 <div class="jumbotron">
+  <br>
+  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <form method="get" action="/photo" style="margin-left: 50px;">
+      <button type="submit">Edit Picture</button>
+    </form>
+    <!-- <button> Edit Picture </button>  -->
+  </p>
 
-    <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <form method="get" action="/photo">
-        <button type="submit">Edit Picture</button>
-      </form>
-       <!-- <button> Edit Picture </button>  -->
-     </p>
-
-    <h2> Rank By Percentage: {{ rankP }}th Place <i class="fas fa-award"></i></h2>
-    <h2> Rank By Wins: {{ rankW }}th Place <i class="fas fa-award"></i></h2>
-    <h2> Games Won: {{user[0]}} </h2>
-    <h2> Games Loss: {{user[2]}} </h2>
-    <h2> Games Total: {{user[1]}} </h2>
-    <h2> Percent Won: {{user[3]}} &percnt; </h2>
+  <h2> Rank By Percentage: {{ rankP }}th Place <i class="fas fa-award"></i></h2>
+  <h2> Rank By Wins: {{ rankW }}th Place <i class="fas fa-award"></i></h2>
+  <h2> Games Won: {{user[0]}} </h2>
+  <h2> Games Loss: {{user[2]}} </h2>
+  <h2> Games Total: {{user[1]}} </h2>
+  <h2> Percent Won: {{user[3]}} &percnt; </h2>
 
 
 </div>
