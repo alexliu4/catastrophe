@@ -21,7 +21,7 @@ body, html {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-65%, -50%);
   color: black;
 }
 
@@ -53,10 +53,20 @@ button {
 h2 {
     text-align:center;
 }
+
+h1 {
+    text-align:center;
+}
+
+#profile {
+   border-radius: 5%;
+}
 </style>
 
 <div class="hero-image">
   <div class="hero-text">
+    <br> <br> <br> <br> <br>
+    <div class="alert alert-info" role="alert">
     <h1 style="font-size:50px">
 
       {% if 'user' in session %}
@@ -69,6 +79,7 @@ h2 {
      </form>
     <!-- <button>Check Leaderboard</button> -->
   </div>
+</div>
   <br> <br> <br> <br> <br>
   <p style="margin-left: 850px;">
 
@@ -76,13 +87,16 @@ h2 {
   </p>
 
   <p style="margin-left: 50px;">
-    <img src={{ photo }} alt="Profile" float="left" height="300" width="300">
+    <img src={{ photo }} alt="Profile" float="left" height="300" width="300" id="profile">
   </p>
 </div>
 
 <div class="jumbotron">
   <br>
-  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <!-- {% if 'user' in session %}
+    <h1> {{session['user']}}'s Stats </h1>
+  {% endif %} -->
+  <p>
     <form method="get" action="/photo" style="margin-left: 50px;">
       <button type="submit">Edit Picture</button>
     </form>
