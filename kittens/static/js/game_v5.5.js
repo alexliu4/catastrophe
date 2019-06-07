@@ -124,7 +124,7 @@ var make_opponent_hand = function(array){
 
 /* Draw a card */
 var draw = function(e){
-    var requestID;
+    
     //console.log("draw")
     console.log(currentPlayer);
     e.stopPropagation();
@@ -138,7 +138,7 @@ var draw = function(e){
     check();
     gauge_val += 5;
     updateGauge(gauge_val)
-
+    var requestID;
     var move_card = function(){
 	c.removeChild(card);
 	var prev_y = Number(card.getAttribute("y"));
@@ -168,7 +168,7 @@ var draw = function(e){
 };
 var opp_draw = function() {
     //console.log("opponent draw????");
-    var requestID;
+    
     var card = deck.pop()
     console.log(card)
     players[currentPlayer].Hand.push(card)
@@ -177,7 +177,7 @@ var opp_draw = function() {
     check();
     gauge_val += 5;
     updateGauge(gauge_val)
-
+    var requestID;
     var get_card = function(){
 	c.removeChild(card);
 	var prev_y = Number(card.getAttribute("y"));
@@ -193,7 +193,7 @@ var opp_draw = function() {
 	//cancel before animating in case  clicked multiple times
 	window.cancelAnimationFrame(requestID)
 	requestID = window.requestAnimationFrame(get_card);
-	if (prev_y < 5 ){
+	if (prev_y < 20 ){
 	    window.cancelAnimationFrame(requestID);
 	    console.log("current player is" + currentPlayer.toString());
 	    arrange_cards(players[1].Hand, 0)
