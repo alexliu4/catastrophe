@@ -10,32 +10,35 @@ app.secret_key = os.urandom(32)
 
 @app.route("/")
 def home():
+    '''Home page, game if logged in or login page '''
     if 'user' not in session:
         return redirect(url_for('login'))
     return render_template("game.html")
 
 @app.route("/win")
 def win():
+    '''Updates leaderboard, only accessible if a user wins '''
     db.add_stat( session['user'], 1 )
     return render_template("win.html")
 
 @app.route("/lose")
 def lose():
+    '''Updates leaderboard, only accessible if a user loses '''
     db.add_stat( session['user'], 0 )
     return render_template("lose.html")
 
 @app.route('/login')
 def login():
+    '''Login page for users, if logged in will bring them to a game'''
     if 'user' in session:
-        print("HELLOLOS")
         return redirect(url_for('game'))
     return render_template('login.html')
 
 @app.route('/auth', methods = ["POST"])
 def auth():
+    '''Intermediate to authenticate login by user'''
     if 'user' in session:
         return redirect(url_for('game'))
-    '''Intermediate to authenticate login by user'''
     # # # Authenticate
     username_input = request.form.get("username")
     password_input = request.form.get("password")
@@ -88,7 +91,7 @@ def register():
 def reset():
     if 'user' in session:
         return redirect(url_for('home'))
-    '''To reset userpassword'''
+    '''To reset user password'''
     if request.form.get("reg_username") != None:
         r_username = request.form.get("reg_username")
         r_answer = request.form.get("reg_answer")
@@ -118,12 +121,12 @@ def reset():
 
 @app.route('/leader', methods = ['GET'])
 def leader():
-    # if 'user' not in session:
-    #     return redirect(url_for('login'))
+    ''' Leaderboard page'''
     return render_template("leader.html", rankPercent = rankByPercent(), rankWin =rankByWins())
 
 @app.route('/account', methods = ['GET'])
 def account():
+    '''Generates account profile'''
     tot = db.get_stat(session['user'])
     pic = picWhich(db.pic(session['user']))
     # print(db.pic(session['user']));
@@ -137,11 +140,76 @@ def account():
 
 @app.route('/error', methods = ['GET'])
 def error():
+    '''If an account has not played a game yet...'''
     return render_template("error.html")
+
+
+@app.route('/logout', methods = ['GET'])
+def logout():
+    ''' Logs the user out '''
+    if 'user' in session:
+        session.pop('user')
+    return redirect(url_for('home'))
+
+@app.route('/game', methods = ['GET'])
+def game():
+    ''' Generates the game only if they are logged in '''
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    return render_template("game.html")
+
+@app.route('/how', methods = ['GET'])
+def how():
+    ''' Instructions on how to play '''
+    return render_template("how.html")
+
+@app.route('/photo', methods = ['GET'])
+def photo():
+    ''' Let's them choose their own photo '''
+    return render_template("photo.html")
+
+# helper functions to change photos
+def picWhich(type):
+    if (type == 0):
+        return "./../static/images/profile.jpg"
+    elif (type == 1):
+        return "./../static/images/profile2.jpg"
+    elif (type == 2):
+        return "./../static/images/profile3.jpg"
+    elif (type == 3):
+        return "./../static/images/garfield.jpg"
+    elif (type == 4):
+        return "./../static/images/jediocto.jpg"
+    elif (type == 5):
+        return "./../static/images/nerdocto.png"
+    elif (type == 6):
+        return "./../static/images/profile4.gif"
+    else:
+        return "./../static/images/profile.jpg"
+
+
+@app.route('/change', methods = ['GET'])
+def change():
+    ''' Updates profile picture '''
+    if 'user' in session:
+        # if pokemon_list:
+        #    return redirect(url_for('home'))
+        if 'profile' in request.args:
+            name = request.args['profile'] # finds the option chosen
+            image = picWhich(name) # converts numbeer option into string (path of image)
+            # print(name)
+            db.update_pic(session['user'], name) # updates the db photo calue
+            # return to account now
+            tot = db.get_stat(session['user'])
+            pic = picWhich(db.pic(session['user']))
+            return render_template("account.html", user = calc(), photo = pic, rankP = userRanksP(session['user']) , rankW = userRanksW(session['user']) )
+    return redirect(url_for('home'))
+
 
 # helper functions for leader and account
 # calcuting values (loss and percentage) returns in a list
 def calc():
+
     if 'user' in session:
         # print (session['user'])
         user = db.get_stat(session['user'])
@@ -175,6 +243,7 @@ def place():
             ans = i + 1
     return ans
 
+# calculates the rank by percent of games won
 def rankByPercent():
     fullStat = db.ranks()
     # print("fullStat:")
@@ -193,34 +262,32 @@ def rankByPercent():
     # print (rank)
     return rank
 
-# print(rankByPercent())
 
+
+# calculates the rank by number of games won
 def rankByWins():
     fullStat = db.ranks()
 
     for stat in fullStat:
         fullStat[stat] = int(fullStat[stat][0])
-    print("fullStat")
-    print(fullStat)
-    # for person in fullStat:
-    #     if (int(fullStat.get(person)[1])):
-    #         percentage = (int((float(fullStat.get(person)[0]) / float(fullStat.get(person)[1])) * 100 ))
-    #         fullStat[person] = percentage
+    # print("fullStat")
+    # print(fullStat)
+
     rank = (list(reversed(sorted(fullStat.items(), key = lambda kv:(kv[1], kv[0])))))
     return rank
 
-# print(rankByWins())
-
+# calculates individual user's rank by percent won
 def userRanksP(user):
     dict = rankByPercent()
     num = 1
     for entry in dict:
         if user == entry[0]:
-            print ("found user" )
+            # print ("found user" )
             return (num)
         num += 1
     return "none found"
 
+# calculates individual user's rank by games won
 def userRanksW(user):
     list = rankByWins()
     num = 1
@@ -230,64 +297,6 @@ def userRanksW(user):
         num += 1
     return "none found"
 
-
-# [('michelle', 50), ('michelle2', 33), ('michelle3', 20), ('maggie', 20), ('alex', 4)]
-
-@app.route('/logout', methods = ['GET'])
-def logout():
-    if 'user' in session:
-        session.pop('user')
-    return redirect(url_for('home'))
-
-@app.route('/game', methods = ['GET'])
-def game():
-    if 'user' not in session:
-        return redirect(url_for('login'))
-    return render_template("game.html")
-
-@app.route('/how', methods = ['GET'])
-def how():
-    return render_template("how.html")
-
-@app.route('/photo', methods = ['GET'])
-def photo():
-    return render_template("photo.html")
-
-# helper functions to change photos
-def picWhich(type):
-    if (type == 0):
-        return "./../static/images/profile.jpg"
-    elif (type == 1):
-        return "./../static/images/profile2.jpg"
-    elif (type == 2):
-        return "./../static/images/profile3.jpg"
-    elif (type == 3):
-        return "./../static/images/garfield.jpg"
-    elif (type == 4):
-        return "./../static/images/jediocto.jpg"
-    elif (type == 5):
-        return "./../static/images/nerdocto.png"
-    elif (type == 6):
-        return "./../static/images/profile4.gif"
-    else:
-        return "./../static/images/profile.jpg"
-
-
-@app.route('/change', methods = ['GET'])
-def change():
-    if 'user' in session:
-        # if pokemon_list:
-        #    return redirect(url_for('home'))
-        if 'profile' in request.args:
-            name = request.args['profile'] # finds the option chosen
-            image = picWhich(name) # converts numbeer option into string (path of image)
-            # print(name)
-            db.update_pic(session['user'], name) # updates the db photo calue
-            # return to account now
-            tot = db.get_stat(session['user'])
-            pic = picWhich(db.pic(session['user']))
-            return render_template("account.html", user = calc(), photo = pic, rankP = userRanksP(session['user']) , rankW = userRanksW(session['user']) )
-    return redirect(url_for('home'))
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
 <style>
-  body {
+body {
   border: 2px solid black;
   background: url(https://us.123rf.com/450wm/cnuisin/cnuisin1901/cnuisin190100345/116527582-cat-seamless-pattern-vector-kitten-cartoon-halloween-isolated-tile-background-repeat-wallpaper.jpg?ver=6);
   background-repeat: repeat;
@@ -18,43 +18,43 @@
 {% block content %}
 
 <body>
-<br>
-<br>
-<br>
+  <br>
+  <br>
+  <br>
 
-<div class="jumbotron">
+  <div class="jumbotron">
 
-  <h5 class="display-4"> Welcome to Exploding Kittens! </h5>
+    <h5 class="display-4"> Welcome to Exploding Kittens! </h5>
 
-  <form action ="/auth" method="POST" >
+    <form action ="/auth" method="POST" >
 
-    <div class="form-group">
-      <label for="exampleUsername">Username</label>
-      <input type= "text" class="form-control" name="username" placeholder="Username" required>
-    </div>
+      <div class="form-group">
+        <label for="exampleUsername">Username</label>
+        <input type= "text" class="form-control" name="username" placeholder="Username" required>
+      </div>
 
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type= "password" class="form-control" name="password" placeholder="Password" required>
-    </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type= "password" class="form-control" name="password" placeholder="Password" required>
+      </div>
 
-    <i>Don't have an account? Register <a href="/register">here</a>! </i> <br>
-    <i>Forgot Password? Click <a href="/reset">here</a>! </i>
-    <br><br>
+      <i>Don't have an account? Register <a href="/register">here</a>! </i> <br>
+      <i>Forgot Password? Click <a href="/reset">here</a>! </i>
+      <br><br>
 
 
-    <button type="submit" class="btn btn-primary" value="Login">Submit</button> <br> <br>
-    {% for msg in get_flashed_messages() %}
-    <div class="alert alert-warning" role="alert">
-    {{msg}}
-    </div>
-    {% endfor %}
+      <button type="submit" class="btn btn-primary" value="Login">Submit</button> <br> <br>
+      {% for msg in get_flashed_messages() %}
+      <div class="alert alert-warning" role="alert">
+        {{msg}}
+      </div>
+      {% endfor %}
 
-  </form>
+    </form>
 
-</div>
+  </div>
 
-<br>
+  <br>
 </body>
 
 {% endblock %}
