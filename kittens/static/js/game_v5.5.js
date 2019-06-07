@@ -213,41 +213,42 @@ var opp_draw = function() {
 }
 
 var drawfrombottom = function(){
-  var card = deck.pop()
-  console.log("player drawing is" + currentPlayer)
-  players[currentPlayer].Hand.push(card)
-  var type = card.getAttribute("type");
-  card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
-  check();
-  gauge_val += 5;
-  updateGauge(gauge_val)
-  //arrange_cards(players[currentPlayer].Hand, y);
-  var requestID;
-  var get_card = function(){
-    c.removeChild(card);
-    var prev_y = Number(card.getAttribute("y"));
-    var prev_x = Number(card.getAttribute("x"));
-
-    var x_inc = (1000 - prev_x)/50;
-    var y_inc = (400 - prev_y)/50;
-    //console.log("x inc:" +x_inc.toString() + "; y_inc: " + y_inc.toString());
-
-    card.setAttribute("y", prev_y + y_inc);
-    card.setAttribute("x", prev_x + x_inc);
-    c.appendChild(card);
-    //cancel before animating in case  clicked multiple times
-    window.cancelAnimationFrame(requestID)
-    requestID = window.requestAnimationFrame(get_card);
-    if (prev_y > 380){
-      window.cancelAnimationFrame(requestID);
-      console.log("current player is" + currentPlayer.toString());
-      arrange_cards(players[0].Hand, 400)
-      //nextTurn();
-    };
-
-  }
-  get_card();
-  nextTurn();
+  draw();
+  // var card = deck.pop()
+  // console.log("player drawing is" + currentPlayer)
+  // players[currentPlayer].Hand.push(card)
+  // var type = card.getAttribute("type");
+  // card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
+  // check();
+  // gauge_val += 5;
+  // updateGauge(gauge_val)
+  // //arrange_cards(players[currentPlayer].Hand, y);
+  // var requestID;
+  // var get_card = function(){
+  //   c.removeChild(card);
+  //   var prev_y = Number(card.getAttribute("y"));
+  //   var prev_x = Number(card.getAttribute("x"));
+  //
+  //   var x_inc = (1000 - prev_x)/50;
+  //   var y_inc = (400 - prev_y)/50;
+  //   //console.log("x inc:" +x_inc.toString() + "; y_inc: " + y_inc.toString());
+  //
+  //   card.setAttribute("y", prev_y + y_inc);
+  //   card.setAttribute("x", prev_x + x_inc);
+  //   c.appendChild(card);
+  //   //cancel before animating in case  clicked multiple times
+  //   window.cancelAnimationFrame(requestID)
+  //   requestID = window.requestAnimationFrame(get_card);
+  //   if (prev_y > 380){
+  //     window.cancelAnimationFrame(requestID);
+  //     console.log("current player is" + currentPlayer.toString());
+  //     arrange_cards(players[0].Hand, 400)
+  //     //nextTurn();
+  //   };
+  //
+  // }
+  // get_card();
+  // nextTurn();
 }
 
 /* Rearrange the spacing of the cards every time one is added to the hand */
