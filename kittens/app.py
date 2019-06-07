@@ -12,7 +12,7 @@ app.secret_key = os.urandom(32)
 def home():
     if 'user' not in session:
         return redirect(url_for('login'))
-    return render_template("login.html")
+    return render_template("game.html")
 
 @app.route("/win")
 def win():
