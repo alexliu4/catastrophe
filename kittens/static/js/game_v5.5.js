@@ -403,10 +403,12 @@ var attack = function() {
   if (currentPlayer == 1){
     opp_draw();
     opp_draw();
+    arrange_cards(players[1].Hand, 0)
   }
   else {
     drawfrombottom();
     drawfrombottom();
+    arrange_cards(players[0].Hand, 400)
   }
 
   nextTurn();
