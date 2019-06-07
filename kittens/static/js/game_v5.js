@@ -215,12 +215,11 @@ var opp_draw = function() {
 }
 
 var drawfrombottom = function(){
-  //e.stopPropagation();
+
   console.log("drew from the bottom now we're here")
-  //deck.push(deck[0]);
-  //deck.shift();
-  opp_draw();
-  nextTurn();
+  deck.push(deck[0]);
+  deck.shift();
+
 }
 
 /* Rearrange the spacing of the cards every time one is added to the hand */
@@ -230,6 +229,14 @@ var arrange_cards = function(hand, y){
     var card = hand[i];
     card.setAttribute("x", 100 + i*900/hand.length);
     card.setAttribute("y", y);
+    if (y == 0){
+      card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", "../static/images/backcard.png");
+    }
+    else{
+      var type = card.getAttribute("type");
+      card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
+    }
+
   }
 }
 
@@ -563,7 +570,7 @@ var oppMove = function() {
   }
   else if (move == 'skip') {nextTurn(); }
   else if (move == 'reverse') {nextTurn(); }
-  else if (move == 'drawfrombottom'){drawfrombottom();}
+  // else if (move == 'drawfrombottom'){drawfrombottom();}
   else if (move == 'favor') {
     favor();
     if (chance < 0.2) {
