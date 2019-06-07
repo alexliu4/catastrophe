@@ -339,6 +339,37 @@ var opp_move_center = function(card) {
 
 }
 
+var return_to_deck = function (card){
+    var requestID;
+    card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", "../static/images/backcard.png");
+    var move_card = function(){
+	c.removeChild(card);
+	var prev_y = Number(card.getAttribute("y"));
+	var prev_x = Number(card.getAttribute("x"));
+
+	var x_inc = (0 - prev_x)/50;
+	var y_inc = (200 - prev_y)/50;
+
+	card.setAttribute("y", prev_y + y_inc);
+	card.setAttribute("x", prev_x + x_inc);
+	c.appendChild(card);
+
+	//cancel before animating in case  clicked multiple times
+	window.cancelAnimationFrame(requestID)
+	requestID = window.requestAnimationFrame(move_card);
+	if (prev_x < 20 ){
+	    window.cancelAnimationFrame(requestID);
+
+	    card.setAttribute("y", 200);
+	    card.setAttribute("x", 0);
+	    card.addEventListener("click", draw);
+	};
+
+    }
+    move_card();
+
+}
+
 //==============================================================================
 var currentPlayer = 0;
 var players = new Array();
