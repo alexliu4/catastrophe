@@ -44,12 +44,7 @@ document.addEventListener("DOMContentLoaded", function(event)
 
 <div class="container-fluid" align="center" >
   <p style="background-color: white" id="turn_tracker"> YOUR TURN </p>
-  <button style="background-color: white" id="favor">  </button>
-  <button style="background-color: white" id="shuffle">  </button>
-  <button style="background-color: white" id="drawfrombottom">  </button>
-  <button style="background-color: white" id="gameover">  </button>
-
-
+  
   <svg width="1200" height="600" id="play_area" >
 
   </svg>
@@ -61,6 +56,6 @@ document.addEventListener("DOMContentLoaded", function(event)
 <br> <br>
 <script src="http://d3js.org/d3.v5.min.js"
 charset="utf-8"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/game_v5.js') }}" ></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/game_v5.5.js') }}" ></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/gauge3.js') }}" ></script>
 {% endblock %}
