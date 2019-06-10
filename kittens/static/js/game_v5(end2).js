@@ -556,7 +556,7 @@ var playerTurn = function(e) {
 var check = function(){
   //console.log("check")
   if (deck.length == 0){
-    endgame()
+    endGame()
   }
   if (players[currentPlayer].Hand.some( card => card.getAttribute("type") === "explode")) {
     if (players[currentPlayer].Hand.some( card => card.getAttribute("type") === "diffuse")) {
@@ -588,8 +588,9 @@ var check = function(){
     }
     else {
       loser = currentPlayer;
-      document.addEventListener('click', blockClick, true);
-      document.addEventListener('mouseover', blockMouseOver, true);
+      c.addEventListener('click', blockClick);
+      c.addEventListener('mouseover', blockMouseOver);
+      //Animation.cancel();
       endGame();
 
     }
@@ -603,11 +604,11 @@ var onTurn = function() {
 // your turn
   if (currentPlayer == 0){
     //console.log("tryna remove elisteners yafeel")
-    document.removeEventListener('click', blockClick, true);
-    document.removeEventListener('mouseover', blockMouseOver, true);
+    c.removeEventListener('click', blockClick);
+    c.removeEventListener('mouseover', blockMouseOver);
     //console.log("removed")
     var move;
-    c.addEventListener('click', playerTurn, false)
+    c.addEventListener('click', playerTurn)
     //console.log("elisteners removed");;
 
 
@@ -621,8 +622,8 @@ var onTurn = function() {
   if (currentPlayer == 1) {
 
     c.removeEventListener('click', playerTurn)
-    document.addEventListener('click', blockClick, true);
-    document.addEventListener('mouseover', blockMouseOver, true);
+    c.addEventListener('click', blockClick);
+    c.addEventListener('mouseover', blockMouseOver);
     if (players[currentPlayer].Hand.length == 1 ) {
       opp_draw();
       nextTurn();
@@ -707,13 +708,15 @@ var oppMove = function() {
 }
 
 var endGame = function() {
-
+  //alert("game over ");
   console.log("you dead dweeb")
   if (loser == 0){
     turn_tracker.innerHTML = "Game Over!  <a href = 'lose'>  Update your stats! </a> ";
+    alert("Game Over! Click the link to update your stats! ");
   }
   else{
     turn_tracker.innerHTML = "Game Over!  <a href = 'win'>  Update your stats! </a> ";
+    alert("Game Over! Click the link to update your stats!")
   }
   c.style.backgroundColor = "#000000"
   console.log("hi")
