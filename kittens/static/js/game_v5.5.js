@@ -286,7 +286,6 @@ var hover = function(e){
 var reset_position = function(e){
   var card = e.target;
   card.setAttribute("y", 400);
-
 }
 
 var remove_card = function(hand, type){
@@ -360,35 +359,66 @@ var opp_move_center = function(card) {
 
 }
 
+var opp_move_deck = function(card) {
+  var requestID = 0;
+  var type = card.getAttribute("type");
+  card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", card_images[type]);
+  var place = function(){
+    c.removeChild(card);
+    var prev_y = Number(card.getAttribute("y"));
+    var prev_x = Number(card.getAttribute("x"));
+
+    var x_inc = (500 - prev_x)/10;
+    var y_inc = (200 - prev_y)/10;
+
+    card.setAttribute("y", prev_y + y_inc);
+    card.setAttribute("x", prev_x + x_inc);
+    c.appendChild(card);
+    //cancel before animating in case  clicked multiple times
+    window.cancelAnimationFrame(requestID)
+    requestID = window.requestAnimationFrame(place);
+    if (prev_y > 200 ){
+      window.cancelAnimationFrame(requestID);
+    };
+  }
+
+  place();
+  card.removeEventListener("mouseover", hover);
+  card.removeEventListener("mouseleave", reset_position);
+  card.removeEventListener("click", move_center);
+  remove_card(players[currentPlayer].Hand, type);
+
+}
+
 var return_to_deck = function (card){
   deck.push(card)
-    var requestID;
-    card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", "../static/images/backcard.png");
-    var move_card = function(){
-	c.removeChild(card);
-	var prev_y = Number(card.getAttribute("y"));
-	var prev_x = Number(card.getAttribute("x"));
+  var requestID;
+  card.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", "../static/images/backcard.png");
+  var move_card = function(){
+    c.removeChild(card);
+    var prev_y = Number(card.getAttribute("y"));
+    var prev_x = Number(card.getAttribute("x"));
 
-	var x_inc = (0 - prev_x)/50;
-	var y_inc = (200 - prev_y)/50;
+    var x_inc = (0 - prev_x)/50;
+    var y_inc = (200 - prev_y)/50;
 
-	card.setAttribute("y", prev_y + y_inc);
-	card.setAttribute("x", prev_x + x_inc);
-	c.appendChild(card);
+    card.setAttribute("y", prev_y + y_inc);
+    card.setAttribute("x", prev_x + x_inc);
+    c.appendChild(card);
 
-	//cancel before animating in case  clicked multiple times
-	window.cancelAnimationFrame(requestID)
-	requestID = window.requestAnimationFrame(move_card);
-	if (prev_x < 20 ){
-	    window.cancelAnimationFrame(requestID);
+    //cancel before animating in case  clicked multiple times
+    window.cancelAnimationFrame(requestID)
+    requestID = window.requestAnimationFrame(move_card);
+    if (prev_x < 20 ){
+      window.cancelAnimationFrame(requestID);
 
-	    card.setAttribute("y", 200);
-	    card.setAttribute("x", 0);
-	    card.addEventListener("click", draw);
-	};
+      card.setAttribute("y", 200);
+      card.setAttribute("x", 0);
+      card.addEventListener("click", draw);
+    };
 
-    }
-    move_card();
+  }
+  move_card();
 
 }
 
@@ -529,16 +559,19 @@ var check = function(){
       let list1 = players[currentPlayer].Hand.filter(card => card.getAttribute("type") == "explode")
       opp_move_center(list[0])
       opp_move_center(list1[0])
+      // c.removeChild(list1[0])
       //animate to put card back in deck
-      //deck.push(list1[0])
-      return_to_deck(list1[0])
-      // var newcard = make_card("explode");
-      // newcard.addEventListener("click", draw);
-      // deck.push(newcard)
+      // deck.push(list1[0])
+      var newcard = make_card("explode");
+      console.log("size of deck")
+      console.log(deck.length)
+      newcard.addEventListener("click", draw);
+      deck.push(newcard)
+      c.appendChild(newcard)
       shuffle(deck)
       console.log("kitten Card has been put back")
-
-
+      console.log("size of deck2")
+      console.log(deck.length)
     }
     else {
       loser = currentPlayer;
@@ -554,9 +587,8 @@ var onTurn = function() {
   console.log("current player " + currentPlayer)
   // turn_tracker.innerHTML = "YOUR TURN";
 
-
+// your turn
   if (currentPlayer == 0){
-
     console.log("start of turn")
     //console.log("tryna remove elisteners yafeel")
     document.removeEventListener('click', blockClick, true);
@@ -564,7 +596,7 @@ var onTurn = function() {
     //console.log("removed")
     var move;
     c.addEventListener('click', playerTurn, false)
-      //console.log("elisteners removed");;
+    //console.log("elisteners removed");;
 
 
     arrange_cards(players[currentPlayer].Hand, 400);
@@ -573,7 +605,7 @@ var onTurn = function() {
 
 
   }
-
+  // opponents turn
   if (currentPlayer == 1) {
 
     c.removeEventListener('click', playerTurn)
@@ -616,19 +648,13 @@ var blockMouseOver = function(e) {
 }
 
 var selectRandom = function(array) {
-
   let list = array.filter(card => card.getAttribute("type") != "diffuse");
-  //console.log(list);
-
   var rand = list[Math.floor(Math.random() * list.length)];
-  //console.log(rand)
-  //var rand_card = list.find(card => car)
   return rand;
 }
 
 var oppMove = function() {
   // turn_tracker.innerHTML = "OPPONENT'S TURN";
-  console.log("???")
   var card = selectRandom(players[currentPlayer].Hand);
   var move = card.getAttribute("type");
   console.log("opponent move is " + move)
@@ -637,27 +663,32 @@ var oppMove = function() {
   var chance = Math.random();
   if (move == 'shuffle') {
     shuffle(deck);
-    if (chance < 0.2) {
-      oppMove();
-    }
-    else { opp_draw(); nextTurn();}
+    // if (chance < 0.2) {
+    //   oppMove();
+    // }
+    // else {
+    opp_draw();
+    nextTurn();
+  // }
   }
   else if (move == 'skip') {nextTurn(); }
   else if (move == 'reverse') {nextTurn(); }
   else if (move == 'drawfrombottom'){opp_draw(); nextTurn();}
   else if (move == 'favor') {
     favor();
-    if (chance < 0.2) {
-      oppMove();
-    }
-    else { opp_draw(); nextTurn();}
+    // if (chance < 0.2) {
+    //   oppMove();
+    // }
+    // else { opp_draw(); nextTurn();}
+    opp_draw();
+    nextTurn();
   }
   else if (move == 'attack') {
     attack();
-    if (chance < 0.2) {
-      oppMove();
-    }
-    else { nextTurn();}
+    // if (chance < 0.2) {
+    //   oppMove();
+    // }
+    // else { nextTurn();}
   }
   //arrange_cards(players[1].Hand, 0)
 
