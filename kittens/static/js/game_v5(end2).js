@@ -14,7 +14,7 @@ var card_images = {
   "shuffle": "../static/images/shuffle.png",
   "reverse": "../static/images/reverse.png",
   "skip": "../static/images/skip.png",
-  "diffuse": "../static/images/diffuse.png",
+  "defuse": "../static/images/defuse.png",
   "explode": "../static/images/explodingkitten.png"
 };
 
@@ -66,23 +66,23 @@ var make_deck = function(){
     }
   }
 
-  var diffuse = make_card("diffuse");
-  diffuse.addEventListener("click", draw);
-  deck.push(diffuse);
+  var defuse = make_card("defuse");
+  defuse.addEventListener("click", draw);
+  deck.push(defuse);
 
 };
 
 
 
 /*
-Adds 4 cards from the deck plus one diffuse to player's hand
+Adds 4 cards from the deck plus one defuse to player's hand
 Adds the hover and place event listeners
 Removes the deck event listener
 */
 var make_my_hand = function(array){
   for (i = 0; i < 5; i+=1){
     if (i == 0){
-      card = make_card("diffuse");
+      card = make_card("defuse");
     }
     else{
       var card = deck.pop();
@@ -103,12 +103,12 @@ var make_my_hand = function(array){
 };
 
 /*
-Adds 4 cards from the deck plus one diffuse to opponent's hand
+Adds 4 cards from the deck plus one defuse to opponent's hand
 */
 var make_opponent_hand = function(array){
   for (i = 0; i < 5; i+=1){
     if (i == 0){
-      card = make_card("diffuse");
+      card = make_card("defuse");
     }
     else{
       var card = deck.pop();
@@ -559,12 +559,12 @@ var check = function(){
     endGame()
   }
   if (players[currentPlayer].Hand.some( card => card.getAttribute("type") === "explode")) {
-    if (players[currentPlayer].Hand.some( card => card.getAttribute("type") === "diffuse")) {
+    if (players[currentPlayer].Hand.some( card => card.getAttribute("type") === "defuse")) {
       //discard both cards
-      console.log("diffused you loser")
-      //remove_card(players[currentPlayer].Hand, "diffuse");
+      console.log("defused you loser")
+      //remove_card(players[currentPlayer].Hand, "defuse");
       //remove_card(players[currentPlayer].Hand, "explode");
-      let list = players[currentPlayer].Hand.filter(card => card.getAttribute("type") == "diffuse")
+      let list = players[currentPlayer].Hand.filter(card => card.getAttribute("type") == "defuse")
       let list1 = players[currentPlayer].Hand.filter(card => card.getAttribute("type") == "explode")
       opp_move_center(list[0])
       opp_move_center(list1[0])
@@ -629,7 +629,7 @@ var onTurn = function() {
       nextTurn();
       // console.log("opp drawing")
     }
-    //else if (players[currentPlayer].Hand.some( card => card.getAttribute("type") == "diffuse")) {
+    //else if (players[currentPlayer].Hand.some( card => card.getAttribute("type") == "defuse")) {
     else if (gauge_val < 20) {
       //console.log("gauge little")
       // console.log("opp drawing")
@@ -660,7 +660,7 @@ var blockMouseOver = function(e) {
 }
 
 var selectRandom = function(array) {
-  let list = array.filter(card => card.getAttribute("type") != "diffuse");
+  let list = array.filter(card => card.getAttribute("type") != "defuse");
   var rand = list[Math.floor(Math.random() * list.length)];
   return rand;
 }
