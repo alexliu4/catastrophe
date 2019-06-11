@@ -12,7 +12,7 @@ The official site for the game can be found [here](https://explodingkittens.com/
 You can visit our live site for our game [here](http://142.93.206.119).
 
 ## Video
-A demo of our game _Exploding Kittens_ is available [here](https://drive.google.com/file/d/1iOxZXrMnz1qCeAGO7aiK_QjS8nDFVRL3/view?usp=sharing).
+A demo of our game _Exploding Kittens_ is available [here](https://youtu.be/ZBzqnCK_GTE).
 
 ---
 
