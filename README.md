@@ -11,8 +11,7 @@ _Exploding Kittens_ is a gaming website for players to go against each other or 
 The official site for the game can be found [here](https://explodingkittens.com/).
 You can visit our live site for our game [here](http://142.93.206.119).
 
-## Video
-A demo of our game _Exploding Kittens_ is available [here](https://youtu.be/ZBzqnCK_GTE).
+## Watch our video demo [here](https://youtu.be/ZBzqnCK_GTE)
 
 ---
 
